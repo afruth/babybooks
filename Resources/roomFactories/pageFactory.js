@@ -22,7 +22,9 @@ var roomFactory = function (options) {
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
-		fullscreen: true
+		fullscreen: true,
+		backgroundImage: '/appFiles/backgrounds/backgroundTile.jpg',
+		backgroundRepeat: true
 	});
 	
 	
@@ -160,10 +162,9 @@ var roomFactory = function (options) {
 	}
 	
 	window.addEventListener('swipe', function(e){
-		console.log(e.direction)
-		if (e.direction === 'right' && pageController.hasNextPage()) {
+		if (e.direction === 'left' && pageController.hasNextPage()) {
 			pageController.nextPage();
-		} else if (e.direction === 'left' && pageController.hasPrevPage())
+		} else if (e.direction === 'right' && pageController.hasPrevPage())
 			pageController.prevPage();
 		});
 	
