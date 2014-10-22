@@ -1,0 +1,8 @@
+/build/**
+.project
+
+.settings/com.appcelerator.titanium.ios.core.prefs
+
+.settings/com.aptana.editor.common.prefs
+
+manifest
