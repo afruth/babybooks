@@ -24,6 +24,11 @@
                     <string>UIInterfaceOrientationLandscapeLeft</string>
                     <string>UIInterfaceOrientationLandscapeRight</string>
                 </array>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
                 <key>UIRequiresPersistentWiFi</key>
                 <false/>
                 <key>UIPrerenderedIcon</key>
@@ -55,10 +60,10 @@
         <module platform="commonjs">ti.cloud</module>
     </modules>
     <deployment-targets>
-        <target device="android">false</target>
+        <target device="android">true</target>
         <target device="blackberry">false</target>
         <target device="ipad">true</target>
-        <target device="iphone">false</target>
+        <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
     <sdk-version>3.4.0.GA</sdk-version>

@@ -31,13 +31,15 @@ var roomFactory = function (options) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			width: Ti.UI.FILL,
-			height: Ti.UI.FILL
+			height: screenSize.platformHeight,
+			width: screenSize.platformHeight / 3 * 4,
+			touchEnabled: false
 		});	
 		
 		var scrollView = Ti.UI.createView({
-			width: Ti.UI.FILL,
-			height: Ti.UI.FILL
+			height: screenSize.platformHeight,
+			width: screenSize.platformHeight / 3 * 4,
+			touchEnabled: false
 		});
 		
 		scrollView.add(imageView);
@@ -48,34 +50,34 @@ var roomFactory = function (options) {
 	var buttonHolder = Ti.UI.createView({
 		name: 'pageButtonHolder',
 		width: Ti.UI.FILL,
-		height: 100,
-		top:5
+		height: 100*F,
+		top:5*F
 	});
 	
 	var buttonBack = Ti.UI.createButton({
 		readmeMode: 'off',
-		left:10,
+		left:10*F,
 		backgroundImage: '/appFiles/button/arrow_left.png',
-		height: 80,
-		width:124,
-		top:10
+		height: 80*F,
+		width:124*F,
+		top:10*F
 	});
 	
 	var buttonForward = Ti.UI.createButton({
 		readmeMode: 'off',
-		right:10,
+		right:10*F,
 		backgroundImage: '/appFiles/button/arrow_right.png',
-		height: 80,
-		width:124,
-		top:10
+		height: 80*F,
+		width:124*F,
+		top:10*F
 	});
 	
 	var buttonShowHideText = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/textButtonSlice.png',
-		width: 80,
-		height: 80,
-		left:140
+		width: 80*F,
+		height: 80*F,
+		left:140*F
 	});
 	
 	window.getTextButton = function() {
@@ -88,9 +90,9 @@ var roomFactory = function (options) {
 	var buttonStartPauseAudio = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/playButtonSlice.png',
-		width: 80,
-		height: 80,
-		left: 225
+		width: 80*F,
+		height: 80*F,
+		left: 225*F
 	});
 	
 	window.getPlayPauseButton = function() {
@@ -104,9 +106,9 @@ var roomFactory = function (options) {
 	var buttonRestartAudio = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/restartButtonSlice.png',
-		width: 80,
-		height: 80,
-		left: 310
+		width: 80*F,
+		height: 80*F,
+		left: 310*F
 	});
 	
 	
@@ -116,9 +118,9 @@ var roomFactory = function (options) {
 	
 	var buttonBackToMenu = Ti.UI.createButton({
 		backgroundImage: '/appFiles/button/backToMenuSlice.png',
-		width: 80,
-		height: 80,
-		left: 395
+		width: 80*F,
+		height: 80*F,
+		left: 395*F
 	});
 	
 	buttonBackToMenu.addEventListener('click', function (e) {
@@ -127,9 +129,9 @@ var roomFactory = function (options) {
 	
 	var buttonReadmeMode = Ti.UI.createButton({
 		backgroundImage: '/appFiles/button/readToMeSlice.png',
-		width: 80,
-		height: 80,
-		left: 480
+		width: 80*F,
+		height: 80*F,
+		left: 480*F
 	});
 	
 	window.getReadmeButton = function() {
@@ -144,6 +146,7 @@ var roomFactory = function (options) {
 		pageController.prevPage();
 	});
 	
+	
 	buttonForward.addEventListener('click', function(e) {
 		pageController.nextPage();
 	});
@@ -155,6 +158,14 @@ var roomFactory = function (options) {
 	if (pageController.hasNextPage()) {
 		buttonHolder.add(buttonForward);
 	}
+	
+	window.addEventListener('swipe', function(e){
+		console.log(e.direction)
+		if (e.direction === 'right' && pageController.hasNextPage()) {
+			pageController.nextPage();
+		} else if (e.direction === 'left' && pageController.hasPrevPage())
+			pageController.prevPage();
+		});
 	
 	
 	//building the text

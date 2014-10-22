@@ -278,11 +278,11 @@ var roomController = function(options) {
 			});
 			continueButton.visible = true;
 		}
-		
-		menu.open();
+
 		_.each(this.loadedPages, function(page) {
 			page.close();
 		});
+		menu.open();
 		
 		this.loadedPages = [];
 	};

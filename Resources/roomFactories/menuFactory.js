@@ -60,17 +60,18 @@ var menuFactory = function (options) {
 		fullscreen: true
 	});
 	
+	
 	if (options.background) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			width: Ti.UI.FILL,
-			height: Ti.UI.FILL
+			height: screenSize.platformHeight,
+			width: screenSize.platformHeight / 3 * 4
 		});	
 		
 		var scrollView = Ti.UI.createView({
-			width: Ti.UI.FILL,
-			height: Ti.UI.FILL
+			height: screenSize.platformHeight,
+			width: screenSize.platformHeight / 3 * 4
 		});
 		
 		scrollView.add(imageView);
@@ -83,9 +84,9 @@ var menuFactory = function (options) {
 			textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 			color: 'white',
 			font: {
-				fontSize: 64
+				fontSize: 64*F
 			},
-			top: 60,
+			top: 60*F,
 			width: Ti.UI.FILL
 		});
 		window.add(titleLabel);
@@ -93,27 +94,28 @@ var menuFactory = function (options) {
 	var buttonHolderView = Ti.UI.createView({
 		name: 'buttonHolderView',
 		width: Ti.UI.FILL,
-		height: screenSize.platformHeight / 2,
-		top: 160,
+		height: (screenSize.platformHeight / 2)*F,
+		top: 160*F,
 		layout: 'vertical'
 	});
 	_.each(options.buttonArray, function(button) {
 		var butHolder = Ti.UI.createView({
 			name: button.name,
-			width: 354,
-			top:10,
-			height:116,			
+			width: 354*F,
+			top:10*F,
+			height:116*F,			
 			backgroundImage: '/appFiles/button/buton.png'
 		});
 		var but = Ti.UI.createButton({
 			
-			left: 120,
-			width: 234,
+			left: 120*F,
+			width: 234*F,
 			title: button.text,
 			color: 'red',
 			font: {
-				fontSize: 24
-			}
+				fontSize: 24*F
+			},
+			backgroundColor: 'transparent'
 		});	
 		
 		but.addEventListener('click', button.action);

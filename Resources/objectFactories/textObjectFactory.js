@@ -9,17 +9,17 @@ var TextObjectFactory = function (text) {
 	var textLabelBackground = Ti.UI.createView({
 		readmeMode: 'off',
 		name: 'textLabel',
-		width: screenSize.platformWidth - 100, height: Ti.UI.SIZE,
-		bottom: 10,
+		width: screenSize.platformWidth - 100*F, height: Ti.UI.SIZE,
+		bottom: 10*F,
 		backgroundColor: 'white',
 		opacity: 0.8
 	});
 	var textLabel = Ti.UI.createLabel({
 		text: text,
-		width: screenSize.platformWidth - 150,
+		width: screenSize.platformWidth - 150*F,
 		height: Ti.UI.SIZE,
-		top:10,
-		bottom:10,
+		top:10*F,
+		bottom:10*F,
 		color: 'black',
 		opacity: 1
 	});
