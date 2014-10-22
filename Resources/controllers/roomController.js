@@ -21,9 +21,7 @@ var roomController = function(options) {
 				{
 					title: 'Default room2',
 					background: '/appFiles/backgrounds/room1.jpg',
-					text: "Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. 
-							Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. 
-							Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf.",
+					text: "Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf.	Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf.",
 					audio: '/appFiles/narration/room5.mp3'
 				},
 				{
@@ -87,6 +85,8 @@ var roomController = function(options) {
 	this.switchReadmeMode = function() {
 		currentPage = this.loadedPages[0];
 		
+		var button = pageController.loadedPages[0].getPlayPauseButton();
+		
 		//going in readme mode
 		if (this.readmeMode === true) {
 			switchMode = false;
@@ -98,7 +98,13 @@ var roomController = function(options) {
 		var text = _.find(currentPage.children, function(child) {
 			return child.name === 'textLabel'; 
 		});
-		text.visible = switchMode;
+		
+		if (this.isTextHidden()) {
+			text.visible = false;
+		} else {
+			text.visible = switchMode;
+		}
+		
 		//hiding buttons
 		var butHolder = _.find(currentPage.children, function(child) {
 			return child.name === 'pageButtonHolder';
@@ -113,6 +119,14 @@ var roomController = function(options) {
 		if (this.readmeMode === true && this.sound) {
 			this.sound.stop();
 			this.sound.play();
+			button.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
+			var buttonText = this.loadedPages[0].getTextButton();
+			buttonText.backgroundImage = '/appFiles/button/textButtonSlice.png';
+			var buttonReadme = this.loadedPages[0].getReadmeButton();
+			buttonReadme.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+		} else {
+			var buttonReadme = this.loadedPages[0].getReadmeButton();
+			buttonReadme.backgroundImage = '/appFiles/button/readToMeSlice.png';
 		}
 		
 		
@@ -187,18 +201,21 @@ var roomController = function(options) {
 	};
 	
 	this.showHideText = function() {
+		var button = this.loadedPages[0].getTextButton();
 		if (this.textHidden === false) {
 			this.textHidden = true;
 			var textBox = _.find(this.loadedPages[0].children, function (item) {
 				return item.name === 'textLabel';
 			});
 			textBox.visible = false;
+			button.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
 		} else {
 			this.textHidden = false;
 			var textBox = _.find(this.loadedPages[0].children, function (item) {
 				return item.name === 'textLabel';
 			});
 			textBox.visible = true;
+			button.backgroundImage = '/appFiles/button/textButtonSlice.png';
 		}
 	};
 	
@@ -213,11 +230,15 @@ var roomController = function(options) {
 			return;
 		}
 		
+		var button = pageController.loadedPages[0].getPlayPauseButton();
 		if (this.sound.playing) {
-			this.sound.pause();
+			this.sound.pause();		
+			button.backgroundImage = '/appFiles/button/playButtonSlice.png';	
 		} else {
 			this.sound.play();
+			button.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
 		}
+		
 	};
 	
 	this.restartAudio = function() {
@@ -227,6 +248,8 @@ var roomController = function(options) {
 		}
 		
 		this.sound.reset();
+		var button = pageController.loadedPages[0].getPlayPauseButton();
+		button.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
 	};
 	
 	this.backToMenu = function() {

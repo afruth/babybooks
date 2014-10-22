@@ -72,23 +72,30 @@ var roomFactory = function (options) {
 	
 	var buttonShowHideText = Ti.UI.createButton({
 		readmeMode: 'off',
-		backgroundImage: '/appFiles/button/showHideText.png',
+		backgroundImage: '/appFiles/button/textButtonSlice.png',
 		width: 80,
 		height: 80,
 		left:140
 	});
 	
+	window.getTextButton = function() {
+		return buttonShowHideText;
+	};
 	buttonShowHideText.addEventListener('click', function (e) {
 		pageController.showHideText();
 	});
 	
 	var buttonStartPauseAudio = Ti.UI.createButton({
 		readmeMode: 'off',
-		backgroundImage: '/appFiles/button/playStopAudio.png',
+		backgroundImage: '/appFiles/button/playButtonSlice.png',
 		width: 80,
 		height: 80,
 		left: 225
 	});
+	
+	window.getPlayPauseButton = function() {
+		return buttonStartPauseAudio;
+	};
 	
 	buttonStartPauseAudio.addEventListener('click', function (e) {
 		pageController.startPauseAudio();
@@ -96,18 +103,19 @@ var roomFactory = function (options) {
 	
 	var buttonRestartAudio = Ti.UI.createButton({
 		readmeMode: 'off',
-		backgroundImage: '/appFiles/button/restartAudio.png',
+		backgroundImage: '/appFiles/button/restartButtonSlice.png',
 		width: 80,
 		height: 80,
 		left: 310
 	});
+	
 	
 	buttonRestartAudio.addEventListener('click', function (e) {
 		pageController.restartAudio();
 	});
 	
 	var buttonBackToMenu = Ti.UI.createButton({
-		backgroundImage: '/appFiles/button/backToMenu.png',
+		backgroundImage: '/appFiles/button/backToMenuSlice.png',
 		width: 80,
 		height: 80,
 		left: 395
@@ -118,11 +126,15 @@ var roomFactory = function (options) {
 	});
 	
 	var buttonReadmeMode = Ti.UI.createButton({
-		backgroundImage: '/appFiles/button/bookmark.png',
+		backgroundImage: '/appFiles/button/readToMeSlice.png',
 		width: 80,
 		height: 80,
 		left: 480
 	});
+	
+	window.getReadmeButton = function() {
+		return buttonReadmeMode;
+	};
 	
 	buttonReadmeMode.addEventListener('click', function (e) {
 		pageController.buttonReadmeModeSwitch();
@@ -151,6 +163,7 @@ var roomFactory = function (options) {
 		window.add(text);
 		if (pageController.isTextHidden()) {
 			text.visible = false;
+			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
 		}
 		buttonHolder.add(buttonShowHideText);
 	}
@@ -159,6 +172,7 @@ var roomFactory = function (options) {
 	//loading the sound
 	if (options.audio) {
 		pageController.sound = new SoundObject(options.audio);
+		
 		buttonHolder.add(buttonStartPauseAudio);
 		buttonHolder.add(buttonRestartAudio);
 	}
