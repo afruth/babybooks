@@ -21,7 +21,9 @@ var roomController = function(options) {
 				{
 					title: 'Default room2',
 					background: '/appFiles/backgrounds/room1.jpg',
-					text: 'Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf.',
+					text: "Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. 
+							Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf. 
+							Lorem ipsum dolor sit amet. Equalidiscia nepitomia adeum tedeum buf.",
 					audio: '/appFiles/narration/room5.mp3'
 				},
 				{
@@ -86,7 +88,7 @@ var roomController = function(options) {
 		currentPage = this.loadedPages[0];
 		
 		//going in readme mode
-		if (this.readmeMode) {
+		if (this.readmeMode === true) {
 			switchMode = false;
 		} else {
 			switchMode = true;
@@ -108,10 +110,13 @@ var roomController = function(options) {
 			but.visible = switchMode;
 		});
 		
-		if (this.readmeMode && this.sound) {
+		if (this.readmeMode === true && this.sound) {
 			this.sound.stop();
 			this.sound.play();
 		}
+		
+		
+		console.log(this.readmeMode);
 		
 	};
 	
@@ -226,10 +231,12 @@ var roomController = function(options) {
 	
 	this.backToMenu = function() {
 		this.resetPages();
+		
 	};
 	
 	
 	this.resetPages = function () {
+		this.readmeMode = false;
 		this.currentPage = 0;
 		//load menu unload everything else
 		
@@ -253,6 +260,8 @@ var roomController = function(options) {
 		_.each(this.loadedPages, function(page) {
 			page.close();
 		});
+		
+		this.loadedPages = [];
 	};
 	
 	
