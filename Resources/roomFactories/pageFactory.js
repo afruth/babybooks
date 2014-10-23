@@ -221,10 +221,12 @@ var roomFactory = function (options) {
 			buttonLeftHolder.show();
 			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
 			pageController.menuHidden = false;
+			buttonShowHideMenu.opacity = 1;
 		} else {
 			buttonLeftHolder.hide();
 			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
 			pageController.menuHidden = true;
+			buttonShowHideMenu.opacity = 0.3;
 		}
 	};
 	
@@ -232,9 +234,11 @@ var roomFactory = function (options) {
 		if (pageController.menuHidden === true) {
 			buttonLeftHolder.hide();
 			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+			buttonShowHideMenu.opacity = 0.3;
 		} else {
 			buttonLeftHolder.show();
 			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+			buttonShowHideMenu.opacity = 1;
 		}
 	};
 	

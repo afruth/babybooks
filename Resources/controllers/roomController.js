@@ -187,6 +187,7 @@ var roomController = function(options) {
 		}
 		
 		this.sound.reset();
+		this.sound.play();
 		var button = pageController.loadedPages[0].getPlayPauseButton();
 		button.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
 	};
