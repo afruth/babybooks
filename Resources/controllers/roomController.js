@@ -39,6 +39,7 @@ var roomController = function(options) {
 	this.textHidden = false;
 	this.bookmarkedPage = null;
 	this.readmeMode = false;
+	this.menuHidden = true;
 	
 	this.sound = null;
 	
@@ -81,73 +82,7 @@ var roomController = function(options) {
 		page.open();		
 		this.loadedPages.push(page);
 	};
-	
-	this.switchReadmeMode = function() {
-		currentPage = this.loadedPages[0];
 		
-		var button = pageController.loadedPages[0].getPlayPauseButton();
-		
-		//going in readme mode
-		if (this.readmeMode === true) {
-			switchMode = false;
-		} else {
-			switchMode = true;
-		};
-		
-		//hiding text
-		var text = _.find(currentPage.children, function(child) {
-			return child.name === 'textLabel'; 
-		});
-		
-		if (this.isTextHidden()) {
-			text.visible = false;
-		} else {
-			text.visible = switchMode;
-		}
-		
-		//hiding buttons
-		var butHolder = _.find(currentPage.children, function(child) {
-			return child.name === 'pageButtonHolder';
-		});
-		var butLeftHolder = _.find(currentPage.children, function(child) {
-			return child.name === 'pageButtonLeftHolder';
-		});
-		var children = butHolder.children.concat(butLeftHolder.children);
-		var toHide = _.filter(children, function(but) {
-			return but.readmeMode === 'off';
-		});
-		_.each(toHide, function(but){
-			but.visible = switchMode;
-		});
-		
-		if (this.readmeMode === true && this.sound) {
-			this.sound.stop();
-			this.sound.play();
-			button.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
-			var buttonText = this.loadedPages[0].getTextButton();
-			buttonText.backgroundImage = '/appFiles/button/textButtonSlice.png';
-			var buttonReadme = this.loadedPages[0].getReadmeButton();
-			buttonReadme.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
-		} else {
-			var buttonReadme = this.loadedPages[0].getReadmeButton();
-			buttonReadme.backgroundImage = '/appFiles/button/readToMeSlice.png';
-		}
-		
-		
-		console.log(this.readmeMode);
-		
-	};
-	
-	this.buttonReadmeModeSwitch = function(){
-		if (this.readmeMode === true) {
-			this.readmeMode = false;
-		} else {
-			this.readmeMode = true;
-		};
-		
-		this.switchReadmeMode();
-	};
-	
 	this.hasNextPage = function() {
 		return this.currentPage < options.rooms.length;
 	};

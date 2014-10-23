@@ -58,11 +58,12 @@ var roomFactory = function (options) {
 	
 	var buttonLeftHolder = Ti.UI.createView({
 		name: 'pageButtonLeftHolder',
-		top: 105*F,
-		left:5*F,
+		top: 15*F,
+		right:5*F,
+		left: 133*F + 120*F + 10*F,
 		height:Ti.UI.SIZE,
 		width: Ti.UI.SIZE,
-		layout: 'vertical'
+		layout: 'horizontal'
 	});
 	
 	var buttonBack = Ti.UI.createButton({
@@ -83,6 +84,14 @@ var roomFactory = function (options) {
 		height: 120*F,
 		width:123*F,
 		top:10*F
+	});
+	
+	var buttonShowHideMenu = Ti.UI.createButton({
+		width: 120*F,
+		height: 120*F,
+		left:135*F,
+		top: 15*F,
+		backgroundImage: '/appFiles/button/showHideOnSlice.png' 
 	});
 	
 	var buttonShowHideText = Ti.UI.createButton({
@@ -146,9 +155,6 @@ var roomFactory = function (options) {
 		return buttonReadmeMode;
 	};
 	
-	buttonReadmeMode.addEventListener('click', function (e) {
-		pageController.buttonReadmeModeSwitch();
-	});
 	
 	buttonBack.addEventListener('click', function(e) {
 		pageController.prevPage();
@@ -204,11 +210,89 @@ var roomFactory = function (options) {
 	window.add(buttonHolder);
 	window.add(buttonLeftHolder);
 	
+	
 	window.addEventListener('open', function(e) {
-		pageController.switchReadmeMode();
+		
 	});
 	
+
+	window.showHideMenu = function() {
+		if (pageController.menuHidden === true) {
+			buttonLeftHolder.show();
+			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+			pageController.menuHidden = false;
+		} else {
+			buttonLeftHolder.hide();
+			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+			pageController.menuHidden = true;
+		}
+	};
 	
+	window.setShowHideMenu = function() {
+		if (pageController.menuHidden === true) {
+			buttonLeftHolder.hide();
+			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+		} else {
+			buttonLeftHolder.show();
+			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+		}
+	};
+	
+
+	window.setReadmeMode = function() {
+		
+		var button = window.getPlayPauseButton();
+		
+		//going in readme mode
+		if (pageController.readmeMode === true) {
+			switchMode = false;
+		} else {
+			switchMode = true;
+		};
+		
+		//hiding text
+		
+		if (pageController.isTextHidden()) {
+			text.visible = false;
+		} else {
+			text.visible = switchMode;
+		}
+		
+
+		buttonBack.visible = switchMode;
+		buttonForward.visible = switchMode;
+		buttonShowHideText.visible = switchMode;
+		buttonStartPauseAudio.visible = switchMode;
+		buttonRestartAudio.visible = switchMode;
+		
+		if (pageController.readmeMode === true && pageController.sound) {
+			pageController.sound.stop();
+			pageController.sound.play();
+			buttonStartPauseAudio.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
+			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
+			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+		} else {
+			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
+		}
+
+	};
+	
+	buttonShowHideMenu.addEventListener('click', function(e){
+		window.showHideMenu();
+	});
+	
+	buttonReadmeMode.addEventListener('click', function(e){
+		if (pageController.readmeMode === true) {
+			pageController.readmeMode = false;
+		} else {
+			pageController.readmeMode = true;
+		};
+		
+		window.setReadmeMode();
+	});
+	window.add(buttonShowHideMenu);
+	window.setShowHideMenu();
+	window.setReadmeMode();
 	
 	return window;
 };
