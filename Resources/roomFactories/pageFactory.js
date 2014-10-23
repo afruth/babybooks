@@ -104,6 +104,7 @@ var roomFactory = function (options) {
 		return buttonShowHideText;
 	};
 	buttonShowHideText.addEventListener('click', function (e) {
+		pageController.clickFeedback();
 		pageController.showHideText();
 	});
 	
@@ -119,6 +120,7 @@ var roomFactory = function (options) {
 	};
 	
 	buttonStartPauseAudio.addEventListener('click', function (e) {
+		pageController.clickFeedback();
 		pageController.startPauseAudio();
 	});
 	
@@ -131,6 +133,7 @@ var roomFactory = function (options) {
 	
 	
 	buttonRestartAudio.addEventListener('click', function (e) {
+		pageController.clickFeedback();
 		pageController.restartAudio();
 	});
 	
@@ -141,6 +144,7 @@ var roomFactory = function (options) {
 	});
 	
 	buttonBackToMenu.addEventListener('click', function (e) {
+		pageController.clickFeedback();
 		pageController.backToMenu();
 	});
 	
@@ -156,11 +160,13 @@ var roomFactory = function (options) {
 	
 	
 	buttonBack.addEventListener('click', function(e) {
+		pageController.clickFeedback();
 		pageController.prevPage();
 	});
 	
 	
 	buttonForward.addEventListener('click', function(e) {
+		pageController.clickFeedback();
 		pageController.nextPage();
 	});
 	
@@ -174,9 +180,9 @@ var roomFactory = function (options) {
 	
 	window.addEventListener('swipe', function(e){
 		if (e.direction === 'left' && pageController.hasNextPage()) {
-			pageController.nextPage();
+			buttonForward.fireEvent('click');
 		} else if (e.direction === 'right' && pageController.hasPrevPage())
-			pageController.prevPage();
+			buttonBack.fireEvent('click');
 		});
 	
 	
@@ -281,10 +287,12 @@ var roomFactory = function (options) {
 	};
 	
 	buttonShowHideMenu.addEventListener('click', function(e){
+		pageController.clickFeedback();
 		window.showHideMenu();
 	});
 	
 	buttonReadmeMode.addEventListener('click', function(e){
+		pageController.clickFeedback();
 		if (pageController.readmeMode === true) {
 			pageController.readmeMode = false;
 		} else {

@@ -1,5 +1,5 @@
 var _ = require('lib/underscore');
-
+Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;
 
 if (screenSize.platformHeight < screenSize.platformWidth) {
@@ -18,6 +18,7 @@ pageController = new PageController();
 menu = new menuFactory();
 
 menu.open();
+
 
 
 

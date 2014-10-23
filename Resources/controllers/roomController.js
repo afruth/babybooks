@@ -226,6 +226,13 @@ var roomController = function(options) {
 		
 		this.loadedPages = [];
 	};
+	var click = Ti.Media.createSound({
+			url: '/appFiles/narration/clap.mp3'
+		});
+	this.clickFeedback = function(e) {
+		Ti.Media.vibrate();
+		click.play();
+	};
 	
 	
 	return this;

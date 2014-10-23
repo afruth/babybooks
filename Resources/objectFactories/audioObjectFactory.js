@@ -5,7 +5,7 @@ var AudioObjectFactory = function (soundPath) {
 	if (!soundPath) {
 		console.warn('Audio file not set for the AudioObjectFactory');
 	}
-	Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
+	
 	var sound = Ti.Media.createSound({
 		url: soundPath
 		});

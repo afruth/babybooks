@@ -12,8 +12,8 @@ var menuFactory = function (options) {
 					text: 'Porneste aventura',
 					name: 'startStory',
 					action: function(e) {
-						console.log(e);
 						if (pageController) {
+							pageController.clickFeedback();
 							pageController.startStory();
 						} else {
 							Ti.Api.error("Page controller not initialized.");
@@ -25,8 +25,8 @@ var menuFactory = function (options) {
 					text: 'Citeste-mi',
 					name: 'readToMe',
 					action: function(e) {
-						console.log(e);
 						if (pageController) {
+							pageController.clickFeedback();
 							pageController.startStoryRead();
 						} else {
 							Ti.Api.error("Page controller not initialized.");
@@ -38,8 +38,8 @@ var menuFactory = function (options) {
 					text: 'Continua aventura',
 					name: 'continueStory',
 					action: function(e) {
-						console.log(e);
 						if (pageController) {
+							pageController.clickFeedback();
 							pageController.continueStory();
 						} else {
 							Ti.Api.error("Page controller not initialized.");
