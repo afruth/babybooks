@@ -109,7 +109,11 @@ var roomController = function(options) {
 		var butHolder = _.find(currentPage.children, function(child) {
 			return child.name === 'pageButtonHolder';
 		});
-		var toHide = _.filter(butHolder.children, function(but) {
+		var butLeftHolder = _.find(currentPage.children, function(child) {
+			return child.name === 'pageButtonLeftHolder';
+		});
+		var children = butHolder.children.concat(butLeftHolder.children);
+		var toHide = _.filter(children, function(but) {
 			return but.readmeMode === 'off';
 		});
 		_.each(toHide, function(but){

@@ -52,34 +52,44 @@ var roomFactory = function (options) {
 	var buttonHolder = Ti.UI.createView({
 		name: 'pageButtonHolder',
 		width: Ti.UI.FILL,
-		height: 100*F,
+		height: 130*F,
 		top:5*F
+	});
+	
+	var buttonLeftHolder = Ti.UI.createView({
+		name: 'pageButtonLeftHolder',
+		top: 105*F,
+		left:5*F,
+		height:Ti.UI.SIZE,
+		width: Ti.UI.SIZE,
+		layout: 'vertical'
 	});
 	
 	var buttonBack = Ti.UI.createButton({
 		readmeMode: 'off',
 		left:10*F,
-		backgroundImage: '/appFiles/button/arrow_left.png',
-		height: 80*F,
-		width:124*F,
+		backgroundImage: '/appFiles/button/buttonLeftSlice.png',
+		backgroundSelectedImage: '/appFiles/button/buttonLeftDownSlice.png',
+		height: 120*F,
+		width:123*F,
 		top:10*F
 	});
 	
 	var buttonForward = Ti.UI.createButton({
 		readmeMode: 'off',
 		right:10*F,
-		backgroundImage: '/appFiles/button/arrow_right.png',
-		height: 80*F,
-		width:124*F,
+		backgroundImage: '/appFiles/button/buttonRightSlice.png',
+		backgroundSelectedImage: '/appFiles/button/buttonRightDownSlice.png',
+		height: 120*F,
+		width:123*F,
 		top:10*F
 	});
 	
 	var buttonShowHideText = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/textButtonSlice.png',
-		width: 80*F,
-		height: 80*F,
-		left:140*F
+		width: 120*F,
+		height: 120*F
 	});
 	
 	window.getTextButton = function() {
@@ -92,9 +102,8 @@ var roomFactory = function (options) {
 	var buttonStartPauseAudio = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/playButtonSlice.png',
-		width: 80*F,
-		height: 80*F,
-		left: 225*F
+		width: 120*F,
+		height: 120*F
 	});
 	
 	window.getPlayPauseButton = function() {
@@ -108,9 +117,8 @@ var roomFactory = function (options) {
 	var buttonRestartAudio = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/restartButtonSlice.png',
-		width: 80*F,
-		height: 80*F,
-		left: 310*F
+		width: 120*F,
+		height: 120*F
 	});
 	
 	
@@ -120,9 +128,8 @@ var roomFactory = function (options) {
 	
 	var buttonBackToMenu = Ti.UI.createButton({
 		backgroundImage: '/appFiles/button/backToMenuSlice.png',
-		width: 80*F,
-		height: 80*F,
-		left: 395*F
+		width: 120*F,
+		height: 120*F
 	});
 	
 	buttonBackToMenu.addEventListener('click', function (e) {
@@ -131,9 +138,8 @@ var roomFactory = function (options) {
 	
 	var buttonReadmeMode = Ti.UI.createButton({
 		backgroundImage: '/appFiles/button/readToMeSlice.png',
-		width: 80*F,
-		height: 80*F,
-		left: 480*F
+		width: 120*F,
+		height: 120*F
 	});
 	
 	window.getReadmeButton = function() {
@@ -177,7 +183,7 @@ var roomFactory = function (options) {
 			text.visible = false;
 			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
 		}
-		buttonHolder.add(buttonShowHideText);
+		buttonLeftHolder.add(buttonShowHideText);
 	}
 	
 	
@@ -185,17 +191,18 @@ var roomFactory = function (options) {
 	if (options.audio) {
 		pageController.sound = new SoundObject(options.audio);
 		
-		buttonHolder.add(buttonStartPauseAudio);
-		buttonHolder.add(buttonRestartAudio);
+		buttonLeftHolder.add(buttonStartPauseAudio);
+		buttonLeftHolder.add(buttonRestartAudio);
 	}
+	buttonLeftHolder.add(buttonReadmeMode);
+	buttonLeftHolder.add(buttonBackToMenu);
 	
-	buttonHolder.add(buttonBackToMenu);
-	buttonHolder.add(buttonReadmeMode);
 	
 	
 	
 	
 	window.add(buttonHolder);
+	window.add(buttonLeftHolder);
 	
 	window.addEventListener('open', function(e) {
 		pageController.switchReadmeMode();
