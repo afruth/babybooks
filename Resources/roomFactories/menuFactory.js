@@ -18,7 +18,8 @@ var menuFactory = function (options) {
 						} else {
 							Ti.Api.error("Page controller not initialized.");
 						}						
-					}
+					},
+					backgroundImage: '/appFiles/button/pornestePovestea.png'
 				},
 				{
 					text: 'Citeste-mi',
@@ -30,7 +31,8 @@ var menuFactory = function (options) {
 						} else {
 							Ti.Api.error("Page controller not initialized.");
 						}
-					}
+					},
+					backgroundImage: '/appFiles/button/citestemiPovestea.png'
 				},
 				{
 					text: 'Continua aventura',
@@ -42,12 +44,13 @@ var menuFactory = function (options) {
 						} else {
 							Ti.Api.error("Page controller not initialized.");
 						}
-					}
+					},
+					backgroundImage: '/appFiles/button/continuaPovestea.png'
 				}
 			],
 			'background': '/appFiles/backgrounds/main_background.png',
 			'animatedObjectsArray': [],
-			'title': 'Bambi, printul padurilor!'
+			'title': '/appFiles/button/bambi.png'
 		};
 	};
 	
@@ -58,7 +61,7 @@ var menuFactory = function (options) {
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
 		fullscreen: true,
-		backgroundImage: '/appFiles/backgrounds/backgroundTile.jpg',
+		backgroundImage: '/appFiles/backgrounds/background-noise.png',
 		backgroundRepeat: true
 	});
 	
@@ -81,43 +84,33 @@ var menuFactory = function (options) {
 	}
 	
 	if (options.title) {
-		var titleLabel = Ti.UI.createLabel({
-			text: options.title,
-			textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-			color: 'white',
-			font: {
-				fontSize: 64*F
-			},
+		var titleLabel = Ti.UI.createImageView({
+			image: options.title,
 			top: 60*F,
-			width: Ti.UI.FILL
+			width: screenSize.platformHeight / 3 * 4 - 30
 		});
 		window.add(titleLabel);
 	}
 	var buttonHolderView = Ti.UI.createView({
 		name: 'buttonHolderView',
 		width: Ti.UI.FILL,
-		height: (screenSize.platformHeight / 2)*F,
 		top: 160*F,
 		layout: 'vertical'
 	});
 	_.each(options.buttonArray, function(button) {
 		var butHolder = Ti.UI.createView({
-			name: button.name,
-			width: 354*F,
-			top:10*F,
-			height:116*F,			
-			backgroundImage: '/appFiles/button/buton.png'
+			
+			top:10*F				
 		});
 		var but = Ti.UI.createButton({
-			
-			left: 120*F,
-			width: 234*F,
-			title: button.text,
+			name: button.name,
+			width: 350*F,
+			height:130*F,
 			color: 'red',
 			font: {
 				fontSize: 24*F
 			},
-			backgroundColor: 'transparent'
+			backgroundImage: button.backgroundImage
 		});	
 		
 		but.addEventListener('click', button.action);
@@ -129,7 +122,7 @@ var menuFactory = function (options) {
 			butHolder.visible = true;
 		}
 		butHolder.add(but);
-		buttonHolderView.add(butHolder);
+		buttonHolderView.add(but);
 					
 	});
 	window.add(buttonHolderView);

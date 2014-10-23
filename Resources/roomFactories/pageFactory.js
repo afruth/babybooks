@@ -23,7 +23,7 @@ var roomFactory = function (options) {
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
 		fullscreen: true,
-		backgroundImage: '/appFiles/backgrounds/backgroundTile.jpg',
+		backgroundImage: '/appFiles/backgrounds/background-noise.png',
 		backgroundRepeat: true
 	});
 	
