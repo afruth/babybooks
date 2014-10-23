@@ -230,7 +230,7 @@ var roomController = function(options) {
 			url: '/appFiles/narration/clap.mp3'
 		});
 	this.clickFeedback = function(e) {
-		Ti.Media.vibrate();
+		//Ti.Media.vibrate();
 		click.play();
 	};
 	
