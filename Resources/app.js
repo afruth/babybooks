@@ -14,7 +14,13 @@ console.log('Height:',screenSize.platformHeight,' Width:',screenSize.platformWid
 var menuFactory = require('roomFactories/menuFactory');
 var PageController = require('/controllers/roomController');
 
-pageController = new PageController();
+
+var options = require('/appFiles/story')();
+
+console.log(options)
+
+
+pageController = new PageController(options);
 menu = new menuFactory();
 
 menu.open();

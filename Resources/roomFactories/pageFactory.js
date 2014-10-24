@@ -26,6 +26,22 @@ var roomFactory = function (options) {
 		backgroundImage: '/appFiles/backgrounds/background-noise.png'
 	});
 	
+	window.openRight = function (animation) {
+		
+	};
+	
+	window.openLeft = function (animation) {
+		
+	};
+	
+	window.closeRight = function (animation) {
+		
+	};
+	
+	window.closeLeft = function (animation) {
+		
+	};
+	
 	
 	
 	if (options.background) {

@@ -20,6 +20,9 @@ var TextObjectFactory = function (text) {
 		height: Ti.UI.SIZE,
 		top:10*F,
 		bottom:10*F,
+		font: {
+			fontSize: 12
+		},
 		color: 'black',
 		opacity: 1
 	});
