@@ -48,7 +48,7 @@ var menuFactory = function (options) {
 					backgroundImage: '/appFiles/button/continuaPovestea.png'
 				}
 			],
-			'background': '/appFiles/backgrounds/main_background.png',
+			'background': '/appFiles/backgrounds/main_menu.png',
 			'animatedObjectsArray': [],
 			'title': '/appFiles/button/bambi.png'
 		};

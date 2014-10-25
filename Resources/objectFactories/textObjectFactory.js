@@ -12,7 +12,8 @@ var TextObjectFactory = function (text) {
 		width: screenSize.platformWidth - 100*F, height: Ti.UI.SIZE,
 		bottom: 10*F,
 		backgroundColor: 'white',
-		opacity: 0.8
+		opacity: 0.8,
+		borderRadius: 10
 	});
 	var textLabel = Ti.UI.createLabel({
 		text: text,
@@ -21,7 +22,7 @@ var TextObjectFactory = function (text) {
 		top:10*F,
 		bottom:10*F,
 		font: {
-			fontSize: 12
+			fontFamily: textFont
 		},
 		color: 'black',
 		opacity: 1
