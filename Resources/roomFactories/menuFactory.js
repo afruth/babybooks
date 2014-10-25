@@ -50,7 +50,7 @@ var menuFactory = function (options) {
 			],
 			'background': '/appFiles/backgrounds/main_menu.png',
 			'animatedObjectsArray': [],
-			'title': '/appFiles/button/bambi.png'
+			'title': '/appFiles/button/titlu.png'
 		};
 	};
 	
@@ -85,15 +85,15 @@ var menuFactory = function (options) {
 	if (options.title) {
 		var titleLabel = Ti.UI.createImageView({
 			image: options.title,
-			top: 60*F,
-			width: screenSize.platformHeight / 3 * 4 - 30
+			top: 30*F,
+			width: screenSize.platformHeight / 1.5
 		});
 		window.add(titleLabel);
 	}
 	var buttonHolderView = Ti.UI.createView({
 		name: 'buttonHolderView',
 		width: Ti.UI.FILL,
-		top: 160*F,
+		top: 330*F,
 		layout: 'vertical'
 	});
 	_.each(options.buttonArray, function(button) {
