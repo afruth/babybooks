@@ -97,10 +97,9 @@ var menuFactory = function (options) {
 		layout: 'vertical'
 	});
 	_.each(options.buttonArray, function(button) {
-		var butHolder = Ti.UI.createView({
-			
-			top:10*F				
-		});
+		if (button.name === 'continueStory' && pageController.bookmarkedPage === null) {
+			return;
+		}
 		var but = Ti.UI.createButton({
 			name: button.name,
 			width: 350*F,
@@ -114,18 +113,10 @@ var menuFactory = function (options) {
 		
 		but.addEventListener('click', button.action);
 		
-		if (butHolder.name === 'continueStory' && !this.bookmarkedPage) {
-			console.log("Not adding continue button. No page bookmarked");
-			butHolder.visible = false;
-		} else {
-			butHolder.visible = true;
-		}
-		butHolder.add(but);
 		buttonHolderView.add(but);
 					
 	});
 	window.add(buttonHolderView);
-	
 	
 	return window;
 };

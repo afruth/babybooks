@@ -14,6 +14,31 @@ if(Ti.Platform.osname=='android') {
    textFont = 'JandaCloserToFree';
 } 
 
+MainWindow = Ti.UI.createWindow({
+	height: Ti.UI.FILL,
+		width: Ti.UI.FILL,
+		backgroundColor: 'black',
+		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
+		navBarHidden: true,
+		fullscreen: true,
+		backgroundImage: '/appFiles/backgrounds/background-noise.png'
+});
+
+MainWindow.open();
+
+ANIM = {};
+
+ANIM.fadeIn = Ti.UI.createAnimation({
+	duration:100,
+	opacity:1
+});
+
+ANIM.fadeOut = Ti.UI.createAnimation({
+	duration:100,
+	opacity:0
+});
+
+
 console.log('Height:',screenSize.platformHeight,' Width:',screenSize.platformWidth);
 
 var menuFactory = require('roomFactories/menuFactory');

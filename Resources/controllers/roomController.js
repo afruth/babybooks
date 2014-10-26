@@ -2,6 +2,7 @@
 //Also this will have the main actions: play sound, pause sound, restart sound, next room, previous room, menu
 
 var PageFactory = require('/roomFactories/pageFactory');
+var menuFactory = require('roomFactories/menuFactory');
 
 var roomController = function(options) {
 	
@@ -53,7 +54,7 @@ var roomController = function(options) {
 		
 		var page = new PageFactory(options.rooms[this.currentPage - 1]);
 		
-		page.open();
+		this.switchRooms(menu, page);
 		this.bookmarkedPage = this.currentPage;
 		
 		this.loadedPages.push(page);
@@ -79,7 +80,7 @@ var roomController = function(options) {
 		
 		var page = new PageFactory(options.rooms[this.currentPage - 1]);
 		
-		page.open();		
+		this.switchRooms(menu, page);		
 		this.loadedPages.push(page);
 	};
 		
@@ -108,9 +109,8 @@ var roomController = function(options) {
 		
 		if (this.loadedPages.length > 1) {
 			var prevPage = this.loadedPages.shift();
-			page.open();
 			this.bookmarkedPage = this.currentPage;
-			prevPage.close();
+			this.switchRooms(prevPage, page);
 		}
 		
 		
@@ -132,9 +132,8 @@ var roomController = function(options) {
 		
 		if (this.loadedPages.length > 1) {
 			var nextPage = this.loadedPages.shift();
-			page.open();
 			this.bookmarkedPage = this.currentPage;
-			nextPage.close();
+			this.switchRooms(nextPage, page);
 		}
 		
 	};
@@ -202,27 +201,14 @@ var roomController = function(options) {
 		this.readmeMode = false;
 		this.currentPage = 0;
 		//load menu unload everything else
-		
+		menu = new menuFactory();
 		
 		if (this.sound) {
 			this.sound.release();
 			this.sound = null;
 		}
 		
-		if (this.bookmarkedPage) {
-			buttonHolder = _.find(menu.children, function(item) {
-				return item.name === 'buttonHolderView';
-			});
-			continueButton = _.find(buttonHolder.children, function(item){
-				return item.name === 'continueStory';
-			});
-			continueButton.visible = true;
-		}
-
-		_.each(this.loadedPages, function(page) {
-			page.close();
-		});
-		menu.open();
+		this.switchRooms(this.loadedPages[0], menu);
 		
 		this.loadedPages = [];
 	};
@@ -232,6 +218,18 @@ var roomController = function(options) {
 	this.clickFeedback = function(e) {
 		//Ti.Media.vibrate();
 		click.play();
+	};
+	
+	this.switchRooms = function (roomOut, roomIn) {
+		if (!roomOut || !roomIn)
+			return false;
+			
+		roomIn.opacity = 0;
+		roomIn.open();
+			
+		roomOut.close(ANIM.fadeOut, function() {
+			roomIn.animate(ANIM.fadeIn);
+		});
 	};
 	
 	
