@@ -38,6 +38,12 @@ ANIM.fadeOut = Ti.UI.createAnimation({
 	opacity:0
 });
 
+ANIM.floatUp = Ti.UI.createAnimation({
+	duration: 2000,
+	top: 0,
+	opacity: 0
+});
+
 
 console.log('Height:',screenSize.platformHeight,' Width:',screenSize.platformWidth);
 

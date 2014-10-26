@@ -3,6 +3,7 @@
  */
 var TextObject = require('/objectFactories/textObjectFactory');
 var SoundObject = require('/objectFactories/audioObjectFactory');
+var AnimatedObject = require('/objectFactories/animatedObjectFactory');
 
 var roomFactory = function (options) {
 	
@@ -224,7 +225,12 @@ var roomFactory = function (options) {
 	buttonLeftHolder.add(buttonReadmeMode);
 	buttonLeftHolder.add(buttonBackToMenu);
 	
-	
+	if (options.objects) {
+		_.each(options.objects, function(obj) {
+			var object = new AnimatedObject(obj);
+			window.add(object);
+		});
+	}
 	
 	
 	
@@ -235,6 +241,7 @@ var roomFactory = function (options) {
 	window.addEventListener('open', function(e) {
 		
 	});
+	
 	
 
 	window.showHideMenu = function() {

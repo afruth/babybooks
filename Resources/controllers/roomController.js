@@ -224,12 +224,20 @@ var roomController = function(options) {
 		if (!roomOut || !roomIn)
 			return false;
 			
-		roomIn.opacity = 0;
-		roomIn.open();
 			
-		roomOut.close(ANIM.fadeOut, function() {
-			roomIn.animate(ANIM.fadeIn);
-		});
+		if (Ti.Platform.osname === 'android') {
+			roomIn.open({
+			    activityEnterAnimation: Ti.Android.R.anim.fade_in,
+			    activityExitAnimation: Ti.Android.R.anim.fade_out
+			});
+			roomOut.close();
+				
+			} else {
+				roomIn.opacity = 0;
+				roomOut.close(ANIM.fadeOut, function() {
+					roomIn.open(ANIM.fadeIn);
+					});
+			}		
 	};
 	
 	

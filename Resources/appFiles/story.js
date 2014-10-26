@@ -6,7 +6,21 @@ var options = function() {
 					title: 'Page 1',
 					background: '/appFiles/backgrounds/vulpii_ii_e_foame.png',
 					text: 'Era odată o vulpe vicleană, ca toate vulpile. Ea umblase o noapte întreagă după hrană şi nu găsise nicăiri. Făcându-se ziua albă, vulpea iese la marginea drumului şi se culcă sub o tufă, gândindu-se ce să mai facă, ca să poată găsi ceva de mâncare.\nŞăzând vulpea cu botul întins pe labele de dinainte, îi vine miros de peşte. Atunci ea rădică puţin capul şi, uitându-se la vale, în lungul drumului, zăreşte venind un car tras de boi.',
-					audio: '/appFiles/narration/room4.mp3'
+					audio: '/appFiles/narration/room4.mp3',
+					objects: [
+						{
+							name: 'Object name',
+							sprite: '/appFiles/objects/sprite.png',
+							dim: {
+								x: screenSize.platformHeight / 2,
+								y: screenSize.platformHeight / 2,
+								w: 200,
+								h: 100
+							},
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Object'
+						}
+					]
 				},
 				{
 					title: 'Page 2',
