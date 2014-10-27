@@ -10,7 +10,7 @@ var TextObjectFactory = function (text) {
 		readmeMode: 'off',
 		name: 'textLabel',
 		width: screenSize.platformWidth - 100*F, height: Ti.UI.SIZE,
-		bottom: 10*F,
+		bottom: (AdEnabled === true)?55:10*F,
 		backgroundColor: 'white',
 		opacity: 0.8,
 		borderRadius: 10

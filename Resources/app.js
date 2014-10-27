@@ -1,6 +1,7 @@
 var _ = require('lib/underscore');
-
-DebugMode = true;
+var Admob = require('ti.admob');
+DebugMode = false;
+AdEnabled = false;
 
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;

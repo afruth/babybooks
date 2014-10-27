@@ -230,6 +230,7 @@ var roomController = function(options) {
 			    activityEnterAnimation: Ti.Android.R.anim.fade_in,
 			    activityExitAnimation: Ti.Android.R.anim.fade_out
 			});
+			
 			roomOut.close();
 				
 			} else {
@@ -238,6 +239,21 @@ var roomController = function(options) {
 					roomIn.open(ANIM.fadeIn);
 					});
 			}		
+			
+			if (AdEnabled === true) {
+				//loading ads
+				var ad = Admob.createView({
+				    bottom: 0,
+				    width: 320, height: 50,
+				    adUnitId: (Ti.Platform.osname === 'android')?'ca-app-pub-7007572546061837/1075309657':'ca-app-pub-7007572546061837/4028776056', // You can get your own at http: //www.admob.com/
+				    adBackgroundColor: 'black',
+				    // You can get your device's id for testDevices by looking in the console log after the app launched
+				    testDevices: [Admob.SIMULATOR_ID],
+				    keywords: 'children, story, child, parent'
+				});
+				
+				roomIn.add(ad);
+				}
 	};
 	
 	

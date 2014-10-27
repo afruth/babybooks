@@ -139,6 +139,9 @@ var roomFactory = function (options) {
 	buttonStartPauseAudio.addEventListener('click', function (e) {
 		pageController.clickFeedback();
 		pageController.startPauseAudio();
+		pageController.readmeMode = false;
+		buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
+		
 	});
 	
 	var buttonRestartAudio = Ti.UI.createButton({
@@ -151,7 +154,10 @@ var roomFactory = function (options) {
 	
 	buttonRestartAudio.addEventListener('click', function (e) {
 		pageController.clickFeedback();
-		pageController.restartAudio();
+		
+		pageController.readmeMode = false;
+		window.setReadmeMode();
+		
 	});
 	
 	var buttonBackToMenu = Ti.UI.createButton({
@@ -285,21 +291,20 @@ var roomFactory = function (options) {
 			text.visible = switchMode;
 		}
 		
-
-		buttonBack.visible = switchMode;
-		buttonForward.visible = switchMode;
-		buttonShowHideText.visible = switchMode;
-		buttonStartPauseAudio.visible = switchMode;
-		buttonRestartAudio.visible = switchMode;
-		
 		if (pageController.readmeMode === true && pageController.sound) {
-			pageController.sound.stop();
 			pageController.sound.play();
+			window.showHideMenu();
 			buttonStartPauseAudio.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
 			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
 			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+			buttonShowHideMenu.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+			
 		} else {
+			buttonStartPauseAudio.backgroundImage = '/appFiles/button/playButtonSlice.png';
+			pageController.sound.pause();
+			window.showHideMenu();
 			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
+			
 		}
 
 	};
