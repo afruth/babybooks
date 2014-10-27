@@ -23,7 +23,7 @@ var AnimObjectFactory = function (options) {
 		left: options.dim.x * F,
 		name: options.name
 	});
-	
+	object.label = null;
 	if (options.sprite) {
 		object.backgroundImage = options.sprite;
 	};
@@ -36,9 +36,10 @@ var AnimObjectFactory = function (options) {
 	}
 	
 	object.addEventListener('click', function(e) {
-		if (object.animated === false) {
-			object.animated = true;
-			var label = Ti.UI.createLabel({
+		
+		if (object.label === null) {
+		
+			object.label = Ti.UI.createLabel({
 				top: (object.top + e.y) * F,
 				left: (object.left + e.x) * F,
 				text: options.text,
@@ -51,16 +52,23 @@ var AnimObjectFactory = function (options) {
 			});
 			
 			
-			pageController.loadedPages[0].add(label);
+			pageController.loadedPages[0].add(object.label);
 			
-			if (object.sound) {
-				object.sound.play();
+			if (e.source.sound) {
+				e.source.sound.play();
 			}
-				
+	
+	
+			var floatUp = Ti.UI.createAnimation({
+				duration: 2000,
+				top: 0,
+				opacity: 0
+			});
 			
-			label.animate(ANIM.floatUp, function() {
-				pageController.loadedPages[0].remove(label);
-				object.animated = false;
+			object.label.animate(floatUp, function() {
+				console.log(object.label);
+				pageController.loadedPages[0].remove(object.label);
+				object.label = null;
 			});
 		}
 	});

@@ -195,12 +195,7 @@ var roomFactory = function (options) {
 		buttonHolder.add(buttonForward);
 	}
 	
-	window.addEventListener('swipe', function(e){
-		if (e.direction === 'left' && pageController.hasNextPage()) {
-			buttonForward.fireEvent('click');
-		} else if (e.direction === 'right' && pageController.hasPrevPage())
-			buttonBack.fireEvent('click');
-		});
+	
 	
 	
 	//building the text
@@ -327,6 +322,44 @@ var roomFactory = function (options) {
 	window.add(buttonShowHideMenu);
 	window.setShowHideMenu();
 	window.setReadmeMode();
+	
+	
+	if (DebugMode === true) {
+		DEBUG_OBJ = {};
+		var square = null;
+		window.addEventListener('touchstart', function(e) {
+			DEBUG_OBJ.x = e.x;
+			DEBUG_OBJ.y = e.y;
+			square = Ti.UI.createView({
+				top: e.y,
+				left: e.x,
+				width: 1,
+				height:1,
+				borderWidth: 2,
+				borderColor: 'red'
+			});
+			window.add(square);
+		});
+		
+		window.addEventListener('touchmove', function(e) {
+			square.width = e.x - DEBUG_OBJ.x;
+			square.height= e.y - DEBUG_OBJ.y;
+		});
+		
+		window.addEventListener('touchend', function(e) {
+			console.log(JSON.stringify({x:DEBUG_OBJ.x, y:DEBUG_OBJ.y, w:e.x - DEBUG_OBJ.x, h: e.y - DEBUG_OBJ.y}));
+			window.remove(square);
+		});
+		
+	} else {
+		window.addEventListener('swipe', function(e){
+		if (e.direction === 'left' && pageController.hasNextPage()) {
+			buttonForward.fireEvent('click');
+		} else if (e.direction === 'right' && pageController.hasPrevPage())
+			buttonBack.fireEvent('click');
+		});
+	}
+	
 	
 	return window;
 };

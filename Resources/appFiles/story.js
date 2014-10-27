@@ -9,16 +9,40 @@ var options = function() {
 					audio: '/appFiles/narration/room4.mp3',
 					objects: [
 						{
-							name: 'Object name',
-							sprite: '/appFiles/objects/sprite.png',
-							dim: {
-								x: screenSize.platformHeight / 2,
-								y: screenSize.platformHeight / 2,
-								w: 200,
-								h: 100
-							},
+							name: 'Vulpe langa copac',
+							dim: {"x":312,"y":377,"w":108,"h":118},
 							sound: '/appFiles/narration/clap.mp3',
-							text: 'Object'
+							text: 'Vulpe'
+						},
+						{
+							dim: {"x":658,"y":276,"w":84,"h":77},
+							name: 'Car cu boi',
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Car cu boi'
+						},
+						{
+							dim: {"x":761,"y":10,"w":250,"h":436},
+							name: 'Copac dreapta',
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Copac'
+						},
+						{
+							dim: {"x":406,"y":51,"w":124,"h":412},
+							name: 'Copac mijloc',
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Copac'
+						},
+						{
+							dim: {"x":5,"y":2,"w":128,"h":314},
+							name: 'Copac stanga',
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Copac'
+						},
+						{
+							dim: {"x":495,"y":554,"w":523,"h":210},
+							name: 'Flori',
+							sound: '/appFiles/narration/clap.mp3',
+							text: 'Flori'
 						}
 					]
 				},

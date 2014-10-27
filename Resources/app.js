@@ -1,4 +1,7 @@
 var _ = require('lib/underscore');
+
+DebugMode = true;
+
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;
 
@@ -36,12 +39,6 @@ ANIM.fadeIn = Ti.UI.createAnimation({
 ANIM.fadeOut = Ti.UI.createAnimation({
 	duration:100,
 	opacity:0
-});
-
-ANIM.floatUp = Ti.UI.createAnimation({
-	duration: 2000,
-	top: 0,
-	opacity: 0
 });
 
 
