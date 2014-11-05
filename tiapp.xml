@@ -57,9 +57,10 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="commonjs">ti.cloud</module>
         <module platform="android">ti.admob</module>
         <module platform="iphone">ti.admob</module>
+        <module platform="android">analytics.google</module>
+        <module platform="iphone">analytics.google</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

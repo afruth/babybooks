@@ -27,22 +27,6 @@ var roomFactory = function (options) {
 		backgroundImage: '/appFiles/backgrounds/background-noise.png'
 	});
 	
-	window.openRight = function (animation) {
-		
-	};
-	
-	window.openLeft = function (animation) {
-		
-	};
-	
-	window.closeRight = function (animation) {
-		
-	};
-	
-	window.closeLeft = function (animation) {
-		
-	};
-	
 	
 	
 	if (options.background) {
@@ -110,12 +94,32 @@ var roomFactory = function (options) {
 		backgroundImage: '/appFiles/button/showHideOnSlice.png' 
 	});
 	
+	buttonShowHideMenu.turnOn = function() {
+		buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+	};
+	
+	buttonShowHideMenu.turnOff = function() {
+		buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+	};
+	
+	buttonShowHideMenu.readMeMode = function() {
+		buttonShowHideMenu.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+	};
+	
 	var buttonShowHideText = Ti.UI.createButton({
 		readmeMode: 'off',
 		backgroundImage: '/appFiles/button/textButtonSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
+	
+	buttonShowHideText.turnOn = function() {
+		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
+	};
+	
+	buttonShowHideText.turnOff = function() {
+		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
+	};
 	
 	window.getTextButton = function() {
 		return buttonShowHideText;
@@ -131,6 +135,14 @@ var roomFactory = function (options) {
 		width: 120*F,
 		height: 120*F
 	});
+	
+	buttonStartPauseAudio.play = function() {
+		buttonStartPauseAudio.backgroundImage = '/appFiles/button/playButtonSlice.png';
+	};
+	
+	buttonStartPauseAudio.pause = function() {
+		buttonStartPauseAudio.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
+	};
 	
 	window.getPlayPauseButton = function() {
 		return buttonStartPauseAudio;
@@ -154,10 +166,7 @@ var roomFactory = function (options) {
 	
 	buttonRestartAudio.addEventListener('click', function (e) {
 		pageController.clickFeedback();
-		
-		pageController.readmeMode = false;
-		window.setReadmeMode();
-		
+		pageController.restartAudio();		
 	});
 	
 	var buttonBackToMenu = Ti.UI.createButton({
@@ -176,6 +185,14 @@ var roomFactory = function (options) {
 		width: 120*F,
 		height: 120*F
 	});
+	
+	buttonReadmeMode.turnOff = function() {
+		buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
+	};
+	
+	buttonReadmeMode.turnOn = function() {
+		buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+	};
 	
 	window.getReadmeButton = function() {
 		return buttonReadmeMode;
@@ -209,8 +226,8 @@ var roomFactory = function (options) {
 		var text = new TextObject(options.text);
 		window.add(text);
 		if (pageController.isTextHidden()) {
-			text.visible = false;
-			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
+			text.hide();
+			buttonShowHideText.turnOff();
 		}
 		buttonLeftHolder.add(buttonShowHideText);
 	}
@@ -240,7 +257,7 @@ var roomFactory = function (options) {
 	
 	
 	window.addEventListener('open', function(e) {
-		
+		Tracker.trackScreen({ path: "Pagina "+pageController.currentPage, customDimension: { readmeMode: pageController.readmeMode }});
 	});
 	
 	
@@ -248,12 +265,12 @@ var roomFactory = function (options) {
 	window.showHideMenu = function() {
 		if (pageController.menuHidden === true) {
 			buttonLeftHolder.show();
-			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+			buttonShowHideMenu.turnOff();
 			pageController.menuHidden = false;
 			buttonShowHideMenu.opacity = 1;
 		} else {
 			buttonLeftHolder.hide();
-			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+			buttonShowHideMenu.turnOn();
 			pageController.menuHidden = true;
 			buttonShowHideMenu.opacity = 0.3;
 		}
@@ -262,19 +279,17 @@ var roomFactory = function (options) {
 	window.setShowHideMenu = function() {
 		if (pageController.menuHidden === true) {
 			buttonLeftHolder.hide();
-			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
+			buttonShowHideMenu.turnOn();
 			buttonShowHideMenu.opacity = 0.3;
 		} else {
 			buttonLeftHolder.show();
-			buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
+			buttonShowHideMenu.turnOff();
 			buttonShowHideMenu.opacity = 1;
 		}
 	};
 	
 
 	window.setReadmeMode = function() {
-		
-		var button = window.getPlayPauseButton();
 		
 		//going in readme mode
 		if (pageController.readmeMode === true) {
@@ -283,28 +298,63 @@ var roomFactory = function (options) {
 			switchMode = true;
 		};
 		
+		
+		
+		if (pageController.readmeMode === true && pageController.sound) {
+			pageController.sound.play();
+			buttonStartPauseAudio.pause();
+			buttonShowHideText.turnOff();
+			buttonReadmeMode.turnOn();
+			buttonShowHideMenu.readMeMode();
+			
+		} else {
+			buttonStartPauseAudio.play();
+			pageController.sound.pause();
+			buttonReadmeMode.turnOff();
+			buttonShowHideText.turnOn();
+		}
+		
 		//hiding text
 		
 		if (pageController.isTextHidden()) {
+			buttonShowHideText.turnOff();
 			text.visible = false;
 		} else {
 			text.visible = switchMode;
 		}
+
+	};
+	
+	window.switchReadmeMode = function() {		
+		//going in readme mode
+		if (pageController.readmeMode === true) {
+			switchMode = false;
+		} else {
+			switchMode = true;
+		};
+		
 		
 		if (pageController.readmeMode === true && pageController.sound) {
 			pageController.sound.play();
 			window.showHideMenu();
-			buttonStartPauseAudio.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
-			buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
-			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
-			buttonShowHideMenu.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
+			buttonStartPauseAudio.pause();
+			buttonShowHideText.turnOff();
+			buttonReadmeMode.turnOn();
+			buttonShowHideMenu.readMeMode();
 			
 		} else {
-			buttonStartPauseAudio.backgroundImage = '/appFiles/button/playButtonSlice.png';
+			buttonStartPauseAudio.play();
 			pageController.sound.pause();
-			window.showHideMenu();
-			buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
+			buttonReadmeMode.turnOff();
+			buttonShowHideText.turnOn();
 			
+		}
+		
+		if (pageController.isTextHidden()) {
+			buttonShowHideText.turnOff();
+			text.visible = false;
+		} else {
+			text.visible = switchMode;
 		}
 
 	};
@@ -322,11 +372,12 @@ var roomFactory = function (options) {
 			pageController.readmeMode = true;
 		};
 		
-		window.setReadmeMode();
+		window.switchReadmeMode();
 	});
 	window.add(buttonShowHideMenu);
-	window.setShowHideMenu();
 	window.setReadmeMode();
+	window.setShowHideMenu();
+	
 	
 	
 	if (DebugMode === true) {

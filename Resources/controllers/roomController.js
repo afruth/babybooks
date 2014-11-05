@@ -52,6 +52,7 @@ var roomController = function(options) {
 		//loading first page
 		this.currentPage = 1;
 		
+		this.menuHidden = true;
 		var page = new PageFactory(options.rooms[this.currentPage - 1]);
 		
 		this.switchRooms(menu, page);
@@ -245,6 +246,7 @@ var roomController = function(options) {
 				var ad = Admob.createView({
 				    bottom: 0,
 				    width: 320, height: 50,
+				    publisherId: 'ca-app-pub-7007572546061837/1075309657',
 				    adUnitId: (Ti.Platform.osname === 'android')?'ca-app-pub-7007572546061837/1075309657':'ca-app-pub-7007572546061837/4028776056', // You can get your own at http: //www.admob.com/
 				    adBackgroundColor: 'black',
 				    // You can get your device's id for testDevices by looking in the console log after the app launched

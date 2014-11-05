@@ -118,6 +118,11 @@ var menuFactory = function (options) {
 	});
 	window.add(buttonHolderView);
 	
+	
+	window.addEventListener('open', function(e) {
+		Tracker.trackScreen({ path: "Menu"});
+	});
+	
 	return window;
 };
 

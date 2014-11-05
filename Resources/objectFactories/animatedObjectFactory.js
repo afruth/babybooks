@@ -16,13 +16,22 @@ var AnimObjectFactory = function (options) {
 		console.warn("Animated object options not set. Setting defaults");
 	}
 	
+	var LEFT_GAP = (screenSize.platformWidth - (screenSize.platformHeight / 3 * 4) != 0)?( screenSize.platformWidth - (screenSize.platformHeight / 3 * 4) ) / 2:0;
+	
 	var object = Ti.UI.createView({
 		width: options.dim.w * F,
 		height: options.dim.h * F,
 		top: options.dim.y * F,
-		left: options.dim.x * F,
+		left: options.dim.x * F + LEFT_GAP,
 		name: options.name
 	});
+	
+	if (DebugMode === true) {
+		object.borderWidth = 2;
+		object.borderColor = 'green';
+		
+	}
+		
 	object.label = null;
 	if (options.sprite) {
 		object.backgroundImage = options.sprite;
@@ -39,9 +48,10 @@ var AnimObjectFactory = function (options) {
 		
 		if (object.label === null) {
 		
+			console.log('Obj.x',object.left,'Obj.y',object.top,'Event.x',e.x,'Event.y',e.y)
 			object.label = Ti.UI.createLabel({
-				top: (object.top + e.y) * F,
-				left: (object.left + e.x) * F,
+				top: object.top + e.y,
+				left: object.left + e.x,
 				text: options.text,
 				width: Ti.UI.SIZE, height: Ti.UI.SIZE,
 				font: {
