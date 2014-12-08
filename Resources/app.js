@@ -1,7 +1,7 @@
 var _ = require('lib/underscore');
 var Admob = require('ti.admob');
 DebugMode = false;
-AdEnabled = true;
+AdEnabled = false;
 
 var GA = require('analytics.google');
 // GA.setDryRun(true);
