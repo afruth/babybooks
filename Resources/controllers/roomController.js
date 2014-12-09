@@ -55,11 +55,13 @@ var roomController = function(options) {
 		this.menuHidden = true;
 		var page = new PageFactory(options.rooms[this.currentPage - 1]);
 		
+		
+		
 		this.switchRooms(menu, page);
 		this.bookmarkedPage = this.currentPage;
 		
 		this.loadedPages.push(page);
-		console.log(this);
+		//console.log(this);
 	};
 	
 	this.startStory = function () {
@@ -228,10 +230,12 @@ var roomController = function(options) {
 			
 			
 		if (Ti.Platform.osname === 'android') {
+			
 			roomIn.open({
 			    activityEnterAnimation: Ti.Android.R.anim.fade_in,
 			    activityExitAnimation: Ti.Android.R.anim.fade_out
 			});
+			
 			
 			roomOut.close();
 				

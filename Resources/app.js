@@ -6,7 +6,8 @@ AdEnabled = false;
 
 var GA = require('analytics.google');
 // GA.setDryRun(true);
-GA.localDispatchPeriod = 10;
+GA.dispatchInterval = 10;
+GA.trackUncaughtExceptions = true;
 
 
 Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
@@ -87,7 +88,7 @@ var PageController = require('/controllers/roomController');
 
 var options = require('/appFiles/story')();
 
-console.log(options);
+//console.log(options);
 
 
 pageController = new PageController(options);

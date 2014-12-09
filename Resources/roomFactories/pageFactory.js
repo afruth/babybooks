@@ -257,9 +257,12 @@ var roomFactory = function (options) {
 	
 	
 	window.addEventListener('open', function(e) {
-		window.setReadmeMode();
-		window.setShowHideMenu();
-		Tracker.trackScreen({ path: "Pagina "+pageController.currentPage, customDimension: { readmeMode: pageController.readmeMode }});
+		if (OSNAME === 'android') {
+			window.setReadmeMode();
+			window.setShowHideMenu();
+		}
+		
+		Tracker.trackScreen({ screenName: "Pagina "+pageController.currentPage });
 	});
 	
 	
@@ -404,7 +407,7 @@ var roomFactory = function (options) {
 		});
 		
 		window.addEventListener('touchend', function(e) {
-			console.log(JSON.stringify({x:DEBUG_OBJ.x, y:DEBUG_OBJ.y, w:e.x - DEBUG_OBJ.x, h: e.y - DEBUG_OBJ.y}));
+			//console.log(JSON.stringify({x:DEBUG_OBJ.x, y:DEBUG_OBJ.y, w:e.x - DEBUG_OBJ.x, h: e.y - DEBUG_OBJ.y}));
 			window.remove(square);
 		});
 		
@@ -416,6 +419,11 @@ var roomFactory = function (options) {
 			buttonBack.fireEvent('click');
 		});
 	}
+	
+	if (OSNAME != 'android') {
+			window.setReadmeMode();
+			window.setShowHideMenu();
+		}
 	
 	
 	return window;
