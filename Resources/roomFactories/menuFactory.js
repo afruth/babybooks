@@ -60,8 +60,8 @@ var menuFactory = function (options) {
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
-		fullscreen: true,
-		backgroundImage: '/appFiles/backgrounds/background-noise.png'
+		fullscreen: true
+		//backgroundImage: '/appFiles/backgrounds/background-noise.png'
 	});
 	
 	

@@ -22,7 +22,8 @@ var TextObjectFactory = function (text) {
 		top:10*F,
 		bottom:10*F,
 		font: {
-			fontFamily: textFont
+			fontFamily: textFont,
+			fontSize: 20*F
 		},
 		color: 'black',
 		opacity: 1

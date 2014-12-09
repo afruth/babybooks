@@ -1,5 +1,6 @@
 var _ = require('lib/underscore');
 var Admob = require('ti.admob');
+var OSNAME = Ti.Platform.osname;
 DebugMode = false;
 AdEnabled = false;
 
@@ -8,7 +9,7 @@ var GA = require('analytics.google');
 GA.localDispatchPeriod = 10;
 
 
-Tracker = GA.getTracker((Ti.Platform.osname === 'android')?'UA-56040292-2':'UA-56040292-3');
+Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
 
 // tracker.trackEvent({
 	// category: "category",
@@ -47,23 +48,24 @@ if (screenSize.platformHeight < screenSize.platformWidth) {
 }
 
 var textFont = 'Janda Closer To Free'; // use the friendly-name on iOS
-if(Ti.Platform.osname=='android') {
+if(OSNAME === 'android') {
    // on Android, use the "base name" of the file (name without extension)
    textFont = 'JandaCloserToFree';
 } 
 
-MainWindow = Ti.UI.createWindow({
-	height: Ti.UI.FILL,
+if(OSNAME === 'android') {
+	MainWindow = Ti.UI.createWindow({
+		height: Ti.UI.FILL,
 		width: Ti.UI.FILL,
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
-		fullscreen: true,
-		backgroundImage: '/appFiles/backgrounds/background-noise.png'
-});
-
-MainWindow.open();
-
+		fullscreen: true
+		//backgroundImage: '/appFiles/backgrounds/background-noise.png'
+	});
+	
+	MainWindow.open();
+}
 ANIM = {};
 
 ANIM.fadeIn = Ti.UI.createAnimation({
