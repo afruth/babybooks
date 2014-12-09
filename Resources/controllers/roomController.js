@@ -59,6 +59,7 @@ var roomController = function(options) {
 		this.bookmarkedPage = this.currentPage;
 		
 		this.loadedPages.push(page);
+		console.log(this);
 	};
 	
 	this.startStory = function () {

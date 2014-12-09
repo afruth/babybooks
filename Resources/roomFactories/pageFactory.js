@@ -257,6 +257,8 @@ var roomFactory = function (options) {
 	
 	
 	window.addEventListener('open', function(e) {
+		window.setReadmeMode();
+		window.setShowHideMenu();
 		Tracker.trackScreen({ path: "Pagina "+pageController.currentPage, customDimension: { readmeMode: pageController.readmeMode }});
 	});
 	
@@ -375,8 +377,7 @@ var roomFactory = function (options) {
 		window.switchReadmeMode();
 	});
 	window.add(buttonShowHideMenu);
-	window.setReadmeMode();
-	window.setShowHideMenu();
+
 	
 	
 	
