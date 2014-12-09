@@ -96,6 +96,84 @@ menu = new menuFactory();
 
 menu.open();
 
+var rateMeTitle = 'Da o nota povestii!';
+var rateMeText = 'Dacă povestea noastră iti place, te rugăm să ne dai o notă și să ne scrii un review. Acest lucru ne va ajuta sa continuam!';
+var remindMeIn = 1000 * 60 * 60 * 24 * 5;
+function rateMeIOS() {
+		var now = new Date().getTime();
+		var remindToRate = Ti.App.Properties.getString('RemindToRate');
+		if (!remindToRate) {
+			Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
+			// setam reminder pentru 5 zile de la prima deschidere
+		} else if (remindToRate < now) {
+			var alertDialog = Titanium.UI.createAlertDialog({
+				title : rateMeTitle,
+				message : rateMeText,
+				buttonNames : ['Votează', 'Mai târziu', 'Niciodată'],
+				cancel : 2
+			});
+			alertDialog.addEventListener('click', function(evt) {
+				switch (evt.index) {
+				case 0:
+					Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+
+					Ti.Platform.openURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=833535888');
+
+					break;
+				case 1:
+					Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
+					// amanam pana peste 5 zile
+					break;
+				case 2:
+					Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+					break;
+				}
+			});
+			alertDialog.show();
+		}
+	}
+	
+function rateMeAndroid() {
+	var now = new Date().getTime();
+	var remindToRate = Ti.App.Properties.getString('RemindToRate');
+	if (!remindToRate) {
+		Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
+		// setam reminder pentru 5 zile de la prima deschidere
+	} else if (remindToRate < now) {
+		var alertDialog = Titanium.UI.createAlertDialog({
+			title : rateMeTitle,
+			message : rateMeText,
+			buttonNames : ['Votează', 'Mai târziu', 'Niciodată'],
+			cancel : 2
+		});
+		alertDialog.addEventListener('click', function(evt) {
+			switch (evt.index) {
+			case 0:
+				Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+				try {
+					var intent= Ti.Android.createIntent({
+						action:Ti.Android.ACTION_VIEW,
+						data:'market://details?id=ro.softeh.ReginaMaria'
+					});
+					Ti.Android.currentActivity.startActivity(intent);
+				} catch (e) {
+					
+				}
+				break;
+			case 1:
+				Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
+				// amanam pana peste 5 zile
+				break;
+			case 2:
+				Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+				break;
+			}
+		});
+		alertDialog.show();
+	}
+}
+	
+(OSNAME === 'android')?rateMeAndroid():rateMeIOS();
 
 
 

@@ -45,6 +45,16 @@
             <fullscreen>true</fullscreen>
             <navbar-hidden>true</navbar-hidden>
             <statusbar-hidden>true</statusbar-hidden>
+            <application>
+                <activity
+                    android:label="@string/app_name"
+                    android:name=".povestiTemplateActivity">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+            </application>
             <application android:theme="@style/Theme.NoActionBar"/>
         </manifest>
     </android>
