@@ -1,5 +1,15 @@
 var _ = require('lib/underscore');
 var Admob = require('ti.admob');
+var rate = require('lib/rate');
+
+rate.title = 'Da o nota povestii!';
+rate.message = 'Dacă povestea noastră iti place, te rugăm să ne dai o notă și să ne scrii un review. Acest lucru ne va ajuta sa continuam!';
+rate.yes = 'OK';
+rate.later = 'Mai tarziu';
+rate.never = 'Nu doresc';
+rate.daysBetween = 3;
+rate.appleId = 123456;
+
 var OSNAME = Ti.Platform.osname;
 DebugMode = false;
 AdEnabled = false;
@@ -54,19 +64,19 @@ if(OSNAME === 'android') {
    textFont = 'JandaCloserToFree';
 } 
 
-if(OSNAME === 'android') {
-	MainWindow = Ti.UI.createWindow({
-		height: Ti.UI.FILL,
-		width: Ti.UI.FILL,
-		backgroundColor: 'black',
-		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
-		navBarHidden: true,
-		fullscreen: true
-		//backgroundImage: '/appFiles/backgrounds/background-noise.png'
-	});
-	
-	MainWindow.open();
-}
+
+MainWindow = Ti.UI.createWindow({
+	height: screenSize.platformHeight,
+	width: screenSize.platformWidth,
+	backgroundColor: 'black',
+	orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
+	navBarHidden: true,
+	fullscreen: true
+	//backgroundImage: '/appFiles/backgrounds/background-noise.png'
+});
+
+MainWindow.open();
+
 ANIM = {};
 
 ANIM.fadeIn = Ti.UI.createAnimation({
@@ -94,86 +104,143 @@ var options = require('/appFiles/story')();
 pageController = new PageController(options);
 menu = new menuFactory();
 
-menu.open();
-
-var rateMeTitle = 'Da o nota povestii!';
-var rateMeText = 'Dacă povestea noastră iti place, te rugăm să ne dai o notă și să ne scrii un review. Acest lucru ne va ajuta sa continuam!';
-var remindMeIn = 1000 * 60 * 60 * 24 * 5;
-function rateMeIOS() {
-		var now = new Date().getTime();
-		var remindToRate = Ti.App.Properties.getString('RemindToRate');
-		if (!remindToRate) {
-			Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
-			// setam reminder pentru 5 zile de la prima deschidere
-		} else if (remindToRate < now) {
-			var alertDialog = Titanium.UI.createAlertDialog({
-				title : rateMeTitle,
-				message : rateMeText,
-				buttonNames : ['Votează', 'Mai târziu', 'Niciodată'],
-				cancel : 2
-			});
-			alertDialog.addEventListener('click', function(evt) {
-				switch (evt.index) {
-				case 0:
-					Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-
-					Ti.Platform.openURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=833535888');
-
-					break;
-				case 1:
-					Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
-					// amanam pana peste 5 zile
-					break;
-				case 2:
-					Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-					break;
-				}
-			});
-			alertDialog.show();
+var label = Ti.UI.createLabel({
+    text:"A2",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
 		}
-	}
-	
-function rateMeAndroid() {
-	var now = new Date().getTime();
-	var remindToRate = Ti.App.Properties.getString('RemindToRate');
-	if (!remindToRate) {
-		Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
-		// setam reminder pentru 5 zile de la prima deschidere
-	} else if (remindToRate < now) {
-		var alertDialog = Titanium.UI.createAlertDialog({
-			title : rateMeTitle,
-			message : rateMeText,
-			buttonNames : ['Votează', 'Mai târziu', 'Niciodată'],
-			cancel : 2
-		});
-		alertDialog.addEventListener('click', function(evt) {
-			switch (evt.index) {
-			case 0:
-				Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-				try {
-					var intent= Ti.Android.createIntent({
-						action:Ti.Android.ACTION_VIEW,
-						data:'market://details?id=ro.softeh.ReginaMaria'
+});
+
+var label2 = Ti.UI.createLabel({
+    text:"împreună cu",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+
+var label3 = Ti.UI.createLabel({
+    text:"Taine Multimedia",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+
+var label4 = Ti.UI.createLabel({
+    text:"prezintă",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+
+var label5 = Ti.UI.createLabel({
+    text:"Ursul păcălit de vulpe",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+
+var label6 = Ti.UI.createLabel({
+    text:"povestit de",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+
+var label7 = Ti.UI.createLabel({
+    text:"Răzvan",
+    width:screenSize.platformWidth,
+    left: -screenSize.platformWidth,
+    color: 'white',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+			fontFamily: textFont,
+			fontSize: 72*F
+		}
+});
+ 
+MainWindow.add(label);
+MainWindow.add(label2);
+MainWindow.add(label3);
+MainWindow.add(label4);
+MainWindow.add(label5);
+MainWindow.add(label6);
+MainWindow.add(label7);
+ 
+label.animate({left:0, duration:300}, function() {
+	setTimeout(function(){
+			label.hide();
+			label2.animate({left:0, duration:300}, function() {
+				setTimeout(function(){
+					label2.hide();
+					label3.animate({left:0, duration:300}, function() {
+						setTimeout(function(){
+							label3.hide();
+							label4.animate({left:0, duration:300}, function() {
+								setTimeout(function(){
+									label4.hide();
+									label5.animate({left:0, duration:300}, function() {
+										setTimeout(function(){
+											label5.hide();
+											label6.animate({left:0, duration:300}, function() {
+												setTimeout(function(){
+													label6.hide();
+													label7.animate({left:0, duration:300}, function() {
+														setTimeout(function(){
+															label7.hide();
+															menu.open();
+															},2000);
+														
+													});
+													},1000);
+												
+											});
+											},2000);
+										
+									});
+									},1000);
+								
+							});
+							},2000);
+						
 					});
-					Ti.Android.currentActivity.startActivity(intent);
-				} catch (e) {
-					
-				}
-				break;
-			case 1:
-				Ti.App.Properties.setString('RemindToRate', now + remindMeIn);
-				// amanam pana peste 5 zile
-				break;
-			case 2:
-				Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-				break;
-			}
-		});
-		alertDialog.show();
-	}
-}
+					},1000);
+				
+			});
+		},2000);
 	
-(OSNAME === 'android')?rateMeAndroid():rateMeIOS();
+});
+
+//menu.open();
 
 
 

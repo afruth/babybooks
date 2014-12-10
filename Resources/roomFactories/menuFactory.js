@@ -117,12 +117,11 @@ var menuFactory = function (options) {
 					
 	});
 	window.add(buttonHolderView);
-	
-	
+
 	window.addEventListener('open', function(e) {
+		rate.plus(5);
 		Tracker.trackScreen({ path: "Menu"});
 	});
-	
 	return window;
 };
 

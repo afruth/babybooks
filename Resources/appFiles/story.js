@@ -82,7 +82,16 @@ var options = function() {
 					text: 'Ursul, auzind că încă-l mai ie şi în râs, se înciudează şi mai tare şi se răpede iute spre copac; dar gura scorburei fiind strâmtă, ursul nu putea să încapă înlăuntru. Atunci el caută o creangă cu cârlig şi începe a cotrobăi prin scorbură, ca să scoată vulpea afară, şi să-i deie de cheltuială… Dar când apuca ursul de piciorul vulpei, ea striga: "Trage, nătărăule! mie nu-mi pasă, că tragi de copac…" Iar când anina cârligul de copac, ea striga: "Valeu, cumătre! nu trage, că-mi rupi piciorul!"\nÎn zadar s-a năcăjit ursul, de-i curgeau sudorile, că tot n-a putut scoate vulpea din scorbura copacului.\nŞi iaca aşa a rămas ursul păcălit de vulpe!',
 					audio: '/appFiles/narration/room4.mp3'
 				}				
-			]
+			],
+		introLabels: [
+			'A2',
+			'împreună cu',
+			'Taine Multimedia',
+			'prezintă',
+			'Ursul păcălit de vulpe',
+			'povestit de',
+			'Razvan'
+		]
 	};
 	
 	return option;
