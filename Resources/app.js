@@ -11,7 +11,7 @@ rate.daysBetween = 3;
 rate.appleId = 123456;
 
 var OSNAME = Ti.Platform.osname;
-DebugMode = false;
+DebugMode = true;
 AdEnabled = false;
 
 var GA = require('analytics.google');
@@ -19,7 +19,7 @@ var GA = require('analytics.google');
 GA.dispatchInterval = 10;
 GA.trackUncaughtExceptions = true;
 
-
+Titanium.App.idleTimerDisabled = true;
 Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
 
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
@@ -47,7 +47,7 @@ MainWindow = Ti.UI.createWindow({
 	fullscreen: true
 	//backgroundImage: '/appFiles/backgrounds/background-noise.png'
 });
-
+MainWindow.keepScreenOn = true;
 MainWindow.open();
 
 ANIM = {};
@@ -150,7 +150,7 @@ var label6 = Ti.UI.createLabel({
 });
 
 var label7 = Ti.UI.createLabel({
-    text:"Răzvan",
+    text:"Răzvan Hîncu",
     width:screenSize.platformWidth,
     left: -screenSize.platformWidth,
     color: 'white',
