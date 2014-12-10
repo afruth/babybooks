@@ -22,33 +22,6 @@ GA.trackUncaughtExceptions = true;
 
 Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
 
-// tracker.trackEvent({
-	// category: "category",
-	// action: "test",
-	// label: "label",
-	// value: 1
-// });
-// 
-// tracker.trackSocial({
-	// network: "facebook",
-	// action: "action",
-	// target: "target"
-// });
-// 
-// tracker.trackTiming({
-	// category: "",
-	// time: 10,
-	// name: "",
-	// label: ""
-// });
-// 
-// tracker.trackScreen({ path: "Home", customDimension: { 1: "free" }});
-
-
-
-
-
-
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;
 
