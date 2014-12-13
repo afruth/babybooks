@@ -11,7 +11,7 @@ rate.daysBetween = 3;
 rate.appleId = 123456;
 
 var OSNAME = Ti.Platform.osname;
-DebugMode = true;
+DebugMode = false;
 AdEnabled = false;
 
 var GA = require('analytics.google');
@@ -168,48 +168,51 @@ MainWindow.add(label4);
 MainWindow.add(label5);
 MainWindow.add(label6);
 MainWindow.add(label7);
+var durShort = 3;
+var stayShort = 10;
+var stayLong = 20;
  
-label.animate({left:0, duration:300}, function() {
+label.animate({left:0, duration:durShort}, function() {
 	setTimeout(function(){
 			label.hide();
-			label2.animate({left:0, duration:300}, function() {
+			label2.animate({left:0, duration:durShort}, function() {
 				setTimeout(function(){
 					label2.hide();
-					label3.animate({left:0, duration:300}, function() {
+					label3.animate({left:0, duration:durShort}, function() {
 						setTimeout(function(){
 							label3.hide();
-							label4.animate({left:0, duration:300}, function() {
+							label4.animate({left:0, duration:durShort}, function() {
 								setTimeout(function(){
 									label4.hide();
-									label5.animate({left:0, duration:300}, function() {
+									label5.animate({left:0, duration:durShort}, function() {
 										setTimeout(function(){
 											label5.hide();
-											label6.animate({left:0, duration:300}, function() {
+											label6.animate({left:0, duration:durShort}, function() {
 												setTimeout(function(){
 													label6.hide();
-													label7.animate({left:0, duration:300}, function() {
+													label7.animate({left:0, duration:durShort}, function() {
 														setTimeout(function(){
 															label7.hide();
 															menu.open();
-															},2000);
+															},stayLong);
 														
 													});
-													},1000);
+													},stayShort);
 												
 											});
-											},2000);
+											},stayLong);
 										
 									});
-									},1000);
+									},stayShort);
 								
 							});
-							},2000);
+							},stayLong);
 						
 					});
-					},1000);
+					},stayShort);
 				
 			});
-		},2000);
+		},stayLong);
 	
 });
 
