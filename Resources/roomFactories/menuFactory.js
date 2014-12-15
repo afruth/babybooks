@@ -9,7 +9,7 @@ var menuFactory = function (options) {
 		options = {
 			'buttonArray': [
 				{
-					text: 'Porneste aventura',
+					text: 'Pornește aventura',
 					name: 'startStory',
 					action: function(e) {
 						if (pageController) {
@@ -19,10 +19,10 @@ var menuFactory = function (options) {
 							Ti.Api.error("Page controller not initialized.");
 						}						
 					},
-					backgroundImage: '/appFiles/button/pornestePovestea.png'
+					//backgroundImage: '/appFiles/button/pornestePovestea.png'
 				},
 				{
-					text: 'Citeste-mi',
+					text: 'Citește-mi',
 					name: 'readToMe',
 					action: function(e) {
 						if (pageController) {
@@ -32,10 +32,10 @@ var menuFactory = function (options) {
 							Ti.Api.error("Page controller not initialized.");
 						}
 					},
-					backgroundImage: '/appFiles/button/citestemiPovestea.png'
+					//backgroundImage: '/appFiles/button/citestemiPovestea.png'
 				},
 				{
-					text: 'Continua aventura',
+					text: 'Continuă aventura',
 					name: 'continueStory',
 					action: function(e) {
 						if (pageController) {
@@ -45,12 +45,12 @@ var menuFactory = function (options) {
 							Ti.Api.error("Page controller not initialized.");
 						}
 					},
-					backgroundImage: '/appFiles/button/continuaPovestea.png'
+					//backgroundImage: '/appFiles/button/continuaPovestea.png'
 				}
 			],
 			'background': '/appFiles/backgrounds/main_menu.png',
 			'animatedObjectsArray': [],
-			'title': '/appFiles/button/titlu.png'
+			//'title': '/appFiles/button/titlu.png'
 		};
 	};
 	
@@ -89,8 +89,24 @@ var menuFactory = function (options) {
 			top: 30*F,
 			width: pHeight / 1.5
 		});
-		window.add(titleLabel);
+		
+	} else {
+		var titleLabel = Ti.UI.createLabel({
+			text: 'Ursul păcălit de vulpe',
+			top: 50*F,
+			width: pHeight / 3 * 4 * 0.85,
+			color: '#900',
+		    font: {
+				fontFamily: textFont,
+				fontSize: 72*F
+			},
+		    shadowColor: '#fff',
+		    shadowOffset: {x:2, y:2},
+		    shadowRadius: 3,		  
+		    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+		});
 	}
+	window.add(titleLabel);
 	var buttonHolderView = Ti.UI.createView({
 		name: 'buttonHolderView',
 		width: Ti.UI.FILL,
@@ -103,13 +119,19 @@ var menuFactory = function (options) {
 		}
 		var but = Ti.UI.createButton({
 			name: button.name,
-			width: 350*F,
+			title: button.text,
+			width: pHeight / 3 * 4 * 0.85,
 			height:130*F,
-			color: 'red',
-			font: {
-				fontSize: 24*F
+			color: '#900',
+		    font: {
+				fontFamily: textFont,
+				fontSize: 43*F
 			},
-			backgroundImage: button.backgroundImage
+		    shadowColor: '#fff',
+		    shadowOffset: {x:2, y:2},
+		    shadowRadius: 3,		  
+		    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+			//backgroundImage: button.backgroundImage
 		});	
 		
 		but.addEventListener('click', button.action);
