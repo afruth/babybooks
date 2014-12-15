@@ -55,8 +55,8 @@ var menuFactory = function (options) {
 	};
 	
 	var window = Ti.UI.createWindow({
-		height: Ti.UI.FILL,
-		width: Ti.UI.FILL,
+		height: pHeight,
+		width: pWidth,
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
@@ -65,17 +65,18 @@ var menuFactory = function (options) {
 	});
 	
 	
+	
 	if (options.background) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			height: screenSize.platformHeight,
-			width: screenSize.platformHeight / 3 * 4
+			height: pHeight,
+			width: pHeight / 3 * 4
 		});	
 		
 		var scrollView = Ti.UI.createView({
-			height: screenSize.platformHeight,
-			width: screenSize.platformHeight / 3 * 4
+			height: pHeight,
+			width: pHeight / 3 * 4
 		});
 		
 		scrollView.add(imageView);
@@ -86,7 +87,7 @@ var menuFactory = function (options) {
 		var titleLabel = Ti.UI.createImageView({
 			image: options.title,
 			top: 30*F,
-			width: screenSize.platformHeight / 1.5
+			width: pHeight / 1.5
 		});
 		window.add(titleLabel);
 	}

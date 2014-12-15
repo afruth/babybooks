@@ -8,7 +8,7 @@ rate.yes = 'OK';
 rate.later = 'Mai tarziu';
 rate.never = 'Nu doresc';
 rate.daysBetween = 3;
-rate.appleId = 123456;
+rate.appleId = 951113901;
 
 var OSNAME = Ti.Platform.osname;
 DebugMode = false;
@@ -24,11 +24,16 @@ Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
 
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;
-
 if (screenSize.platformHeight < screenSize.platformWidth) {
-	F = screenSize.platformHeight/768;
+	
+	var pHeight = screenSize.platformHeight;
+	var pWidth = screenSize.platformWidth;
+	F = pHeight/768;
 } else {
-	F = screenSize.platformWidth/768;
+	
+	var pHeight = screenSize.platformWidth;
+	var pWidth = screenSize.platformHeight;
+	F = pWidth/768;
 }
 
 var textFont = 'Janda Closer To Free'; // use the friendly-name on iOS
@@ -39,8 +44,8 @@ if(OSNAME === 'android') {
 
 
 MainWindow = Ti.UI.createWindow({
-	height: screenSize.platformHeight,
-	width: screenSize.platformWidth,
+	height: pHeight,
+	width: pWidth,
 	backgroundColor: 'black',
 	orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 	navBarHidden: true,
@@ -63,7 +68,7 @@ ANIM.fadeOut = Ti.UI.createAnimation({
 });
 
 
-console.log('Height:',screenSize.platformHeight,' Width:',screenSize.platformWidth);
+//console.log('Height:',screenSize.platformHeight,' Width:',screenSize.platformWidth);
 
 var menuFactory = require('roomFactories/menuFactory');
 var PageController = require('/controllers/roomController');
@@ -78,9 +83,9 @@ pageController = new PageController(options);
 menu = new menuFactory();
 
 var label = Ti.UI.createLabel({
-    text:"A2",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    text:"Stary",
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -91,8 +96,8 @@ var label = Ti.UI.createLabel({
 
 var label2 = Ti.UI.createLabel({
     text:"împreună cu",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -103,8 +108,8 @@ var label2 = Ti.UI.createLabel({
 
 var label3 = Ti.UI.createLabel({
     text:"Taine Multimedia",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -115,8 +120,8 @@ var label3 = Ti.UI.createLabel({
 
 var label4 = Ti.UI.createLabel({
     text:"prezintă",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -127,8 +132,8 @@ var label4 = Ti.UI.createLabel({
 
 var label5 = Ti.UI.createLabel({
     text:"Ursul păcălit de vulpe",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -139,8 +144,8 @@ var label5 = Ti.UI.createLabel({
 
 var label6 = Ti.UI.createLabel({
     text:"povestit de",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -151,8 +156,8 @@ var label6 = Ti.UI.createLabel({
 
 var label7 = Ti.UI.createLabel({
     text:"Răzvan Hîncu",
-    width:screenSize.platformWidth,
-    left: -screenSize.platformWidth,
+    width:pWidth,
+    left: -pWidth,
     color: 'white',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
@@ -168,9 +173,9 @@ MainWindow.add(label4);
 MainWindow.add(label5);
 MainWindow.add(label6);
 MainWindow.add(label7);
-var durShort = 3;
-var stayShort = 10;
-var stayLong = 20;
+var durShort = 100;
+var stayShort = 500;
+var stayLong = 1000;
  
 label.animate({left:0, duration:durShort}, function() {
 	setTimeout(function(){

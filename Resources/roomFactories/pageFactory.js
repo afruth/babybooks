@@ -63,7 +63,8 @@ var roomFactory = function (options) {
 		left: 133*F + 120*F + 10*F,
 		height:Ti.UI.SIZE,
 		width: Ti.UI.SIZE,
-		layout: 'horizontal'
+		layout: 'horizontal',
+		visible: false
 	});
 	
 	var buttonBack = Ti.UI.createButton({
@@ -91,8 +92,9 @@ var roomFactory = function (options) {
 		height: 120*F,
 		left:135*F,
 		top: 15*F,
-		backgroundImage: '/appFiles/button/showHideOnSlice.png' 
+		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/readToMeOnSlice.png':'/appFiles/button/showHideOnSlice.png'
 	});
+	pageController.menuHidden === true;
 	
 	buttonShowHideMenu.turnOn = function() {
 		buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
@@ -108,7 +110,7 @@ var roomFactory = function (options) {
 	
 	var buttonShowHideText = Ti.UI.createButton({
 		readmeMode: 'off',
-		backgroundImage: '/appFiles/button/textButtonSlice.png',
+		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/textButtonDisabledSlice.png':'/appFiles/button/textButtonSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
@@ -131,7 +133,7 @@ var roomFactory = function (options) {
 	
 	var buttonStartPauseAudio = Ti.UI.createButton({
 		readmeMode: 'off',
-		backgroundImage: '/appFiles/button/playButtonSlice.png',
+		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/pauseButtonSlice.png':'/appFiles/button/playButtonSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
@@ -181,7 +183,7 @@ var roomFactory = function (options) {
 	});
 	
 	var buttonReadmeMode = Ti.UI.createButton({
-		backgroundImage: '/appFiles/button/readToMeSlice.png',
+		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/readToMeOnSlice.png':'/appFiles/button/readToMeSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
@@ -225,7 +227,7 @@ var roomFactory = function (options) {
 	if (options.text) {
 		var text = new TextObject(options.text);
 		window.add(text);
-		if (pageController.isTextHidden()) {
+		if (pageController.readmeMode === true || pageController.isTextHidden()) {
 			text.hide();
 			buttonShowHideText.turnOff();
 		}
@@ -239,6 +241,12 @@ var roomFactory = function (options) {
 		
 		buttonLeftHolder.add(buttonStartPauseAudio);
 		buttonLeftHolder.add(buttonRestartAudio);
+		if (pageController.readmeMode === true) {
+			setTimeout(function(){
+				pageController.sound.play();
+			},1000);
+			
+		}
 	}
 	buttonLeftHolder.add(buttonReadmeMode);
 	buttonLeftHolder.add(buttonBackToMenu);
@@ -258,8 +266,12 @@ var roomFactory = function (options) {
 	
 	window.addEventListener('open', function(e) {
 		if (OSNAME === 'android') {
-			window.setReadmeMode();
-			window.setShowHideMenu();
+			setTimeout(function(){
+				//window.switchReadmeMode();
+				//
+				//window.setShowHideMenu();
+			},1000);
+			
 		}
 		
 		Tracker.trackScreen({ screenName: "Pagina "+pageController.currentPage });
@@ -272,12 +284,10 @@ var roomFactory = function (options) {
 			buttonLeftHolder.show();
 			buttonShowHideMenu.turnOff();
 			pageController.menuHidden = false;
-			buttonShowHideMenu.opacity = 1;
 		} else {
 			buttonLeftHolder.hide();
 			buttonShowHideMenu.turnOn();
 			pageController.menuHidden = true;
-			buttonShowHideMenu.opacity = 0.3;
 		}
 	};
 	
@@ -285,11 +295,9 @@ var roomFactory = function (options) {
 		if (pageController.menuHidden === true) {
 			buttonLeftHolder.hide();
 			buttonShowHideMenu.turnOn();
-			buttonShowHideMenu.opacity = 0.3;
 		} else {
 			buttonLeftHolder.show();
 			buttonShowHideMenu.turnOff();
-			buttonShowHideMenu.opacity = 1;
 		}
 	};
 	
@@ -307,25 +315,20 @@ var roomFactory = function (options) {
 		
 		if (pageController.readmeMode === true && pageController.sound) {
 			pageController.sound.play();
+			window.showHideMenu();
 			buttonStartPauseAudio.pause();
 			buttonShowHideText.turnOff();
 			buttonReadmeMode.turnOn();
 			buttonShowHideMenu.readMeMode();
+			text.visible = false;
 			
 		} else {
 			buttonStartPauseAudio.play();
 			pageController.sound.pause();
 			buttonReadmeMode.turnOff();
 			buttonShowHideText.turnOn();
-		}
-		
-		//hiding text
-		
-		if (pageController.isTextHidden()) {
-			buttonShowHideText.turnOff();
-			text.visible = false;
-		} else {
-			text.visible = switchMode;
+			text.visible = true;
+			
 		}
 
 	};
@@ -346,20 +349,15 @@ var roomFactory = function (options) {
 			buttonShowHideText.turnOff();
 			buttonReadmeMode.turnOn();
 			buttonShowHideMenu.readMeMode();
+			text.visible = false;
 			
 		} else {
 			buttonStartPauseAudio.play();
 			pageController.sound.pause();
 			buttonReadmeMode.turnOff();
 			buttonShowHideText.turnOn();
+			text.visible = true;
 			
-		}
-		
-		if (pageController.isTextHidden()) {
-			buttonShowHideText.turnOff();
-			text.visible = false;
-		} else {
-			text.visible = switchMode;
 		}
 
 	};
@@ -421,8 +419,8 @@ var roomFactory = function (options) {
 	}
 	
 	if (OSNAME != 'android') {
-			window.setReadmeMode();
-			window.setShowHideMenu();
+			//window.setReadmeMode();
+			//window.setShowHideMenu();
 		}
 	
 	
