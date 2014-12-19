@@ -24,18 +24,14 @@ Tracker = GA.getTracker((OSNAME === 'android')?'UA-56040292-2':'UA-56040292-3');
 
 Ti.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 screenSize = Ti.Platform.displayCaps;
-if (screenSize.platformHeight < screenSize.platformWidth) {
-	
-	var pHeight = screenSize.platformHeight;
-	var pWidth = screenSize.platformWidth;
-	F = pHeight/768;
-} else {
-	
-	var pHeight = screenSize.platformWidth;
-	var pWidth = screenSize.platformHeight;
-	F = pWidth/768;
-}
 
+var density = 1;
+if (OSNAME === 'android') {
+	density = screenSize.logicalDensityFactor;
+}
+var pHeight = screenSize.platformHeight/density;
+var pWidth = screenSize.platformWidth/density;
+F = pHeight/768;
 var textFont = 'Janda Closer To Free'; // use the friendly-name on iOS
 if(OSNAME === 'android') {
    // on Android, use the "base name" of the file (name without extension)
@@ -47,7 +43,6 @@ MainWindow = Ti.UI.createWindow({
 	height: pHeight,
 	width: pWidth,
 	backgroundColor: 'black',
-	orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 	navBarHidden: true,
 	fullscreen: true
 	//backgroundImage: '/appFiles/backgrounds/background-noise.png'
@@ -176,7 +171,8 @@ MainWindow.add(label7);
 var durShort = 100;
 var stayShort = 500;
 var stayLong = 1000;
- 
+
+setTimeout(function(){
 label.animate({left:0, duration:durShort}, function() {
 	setTimeout(function(){
 			label.hide();
@@ -220,6 +216,7 @@ label.animate({left:0, duration:durShort}, function() {
 		},stayLong);
 	
 });
+},1500);
 
 //menu.open();
 

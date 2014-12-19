@@ -18,8 +18,8 @@ var roomFactory = function (options) {
 		};
 	
 	var window = Ti.UI.createWindow({
-		height: Ti.UI.FILL,
-		width: Ti.UI.FILL,
+		height: pHeight,
+		width: pWidth,
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
@@ -33,14 +33,14 @@ var roomFactory = function (options) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			height: screenSize.platformHeight,
-			width: screenSize.platformHeight / 3 * 4,
+			height: pHeight,
+			width: pHeight / 3 * 4,
 			touchEnabled: false
 		});	
 		
 		var scrollView = Ti.UI.createView({
-			height: screenSize.platformHeight,
-			width: screenSize.platformHeight / 3 * 4,
+			height: pHeight,
+			width: pHeight / 3 * 4,
 			touchEnabled: false
 		});
 		
@@ -88,6 +88,7 @@ var roomFactory = function (options) {
 	});
 	
 	var buttonShowHideMenu = Ti.UI.createButton({
+		state: 'on',
 		width: 120*F,
 		height: 120*F,
 		left:135*F,
@@ -97,29 +98,44 @@ var roomFactory = function (options) {
 	pageController.menuHidden === true;
 	
 	buttonShowHideMenu.turnOn = function() {
+		if (buttonShowHideMenu.state === 'on')
+			return;
+		buttonShowHideMenu.state = 'on';
 		buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOnSlice.png';
 	};
 	
 	buttonShowHideMenu.turnOff = function() {
+		if (buttonShowHideMenu.state === 'off')
+			return;
+		buttonShowHideMenu.state = 'off';
 		buttonShowHideMenu.backgroundImage = '/appFiles/button/showHideOffSlice.png';
 	};
 	
 	buttonShowHideMenu.readMeMode = function() {
+		if(buttonShowHideMenu.state === 'readMeMode')
+			return;
+		buttonShowHideMenu.state = 'readMeMode';
 		buttonShowHideMenu.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
 	};
 	
 	var buttonShowHideText = Ti.UI.createButton({
-		readmeMode: 'off',
+		state: 'on',
 		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/textButtonDisabledSlice.png':'/appFiles/button/textButtonSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
 	
 	buttonShowHideText.turnOn = function() {
+		if (buttonShowHideText.state === 'on')
+			return;
+		buttonShowHideText.state = 'on';
 		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
 	};
 	
 	buttonShowHideText.turnOff = function() {
+		if (buttonShowHideText.state === 'off')
+			return;
+		buttonShowHideText.state = 'off';
 		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
 	};
 	
@@ -132,17 +148,23 @@ var roomFactory = function (options) {
 	});
 	
 	var buttonStartPauseAudio = Ti.UI.createButton({
-		readmeMode: 'off',
+		state: 'pause',
 		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/pauseButtonSlice.png':'/appFiles/button/playButtonSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
 	
 	buttonStartPauseAudio.play = function() {
+		if(buttonStartPauseAudio.state === 'play')
+			return;
+		buttonStartPauseAudio.state = 'play';
 		buttonStartPauseAudio.backgroundImage = '/appFiles/button/playButtonSlice.png';
 	};
 	
 	buttonStartPauseAudio.pause = function() {
+		if(buttonStartPauseAudio.state === 'pause')
+			return;
+		buttonStartPauseAudio.state = 'pause';
 		buttonStartPauseAudio.backgroundImage = '/appFiles/button/pauseButtonSlice.png';
 	};
 	
@@ -183,16 +205,23 @@ var roomFactory = function (options) {
 	});
 	
 	var buttonReadmeMode = Ti.UI.createButton({
+		state: 'off',
 		backgroundImage: (pageController.readmeMode === true)?'/appFiles/button/readToMeOnSlice.png':'/appFiles/button/readToMeSlice.png',
 		width: 120*F,
 		height: 120*F
 	});
 	
 	buttonReadmeMode.turnOff = function() {
+		if (buttonReadmeMode.state === 'off')
+			return;
+		buttonReadmeMode.state = 'off';
 		buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeSlice.png';
 	};
 	
 	buttonReadmeMode.turnOn = function() {
+		if (buttonReadmeMode.state === 'on')
+			return;
+		buttonReadmeMode.state = 'on';
 		buttonReadmeMode.backgroundImage = '/appFiles/button/readToMeOnSlice.png';
 	};
 	
@@ -264,16 +293,7 @@ var roomFactory = function (options) {
 	window.add(buttonLeftHolder);
 	
 	
-	window.addEventListener('open', function(e) {
-		if (OSNAME === 'android') {
-			setTimeout(function(){
-				//window.switchReadmeMode();
-				//
-				//window.setShowHideMenu();
-			},1000);
-			
-		}
-		
+	window.addEventListener('open', function(e) {		
 		Tracker.trackScreen({ screenName: "Pagina "+pageController.currentPage });
 	});
 	

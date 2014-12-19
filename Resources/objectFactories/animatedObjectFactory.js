@@ -5,8 +5,8 @@ var AnimObjectFactory = function (options) {
 			name: 'Object name',
 			sprite: '/appFiles/objects/sprite.png',
 			dim: {
-				x: screenSize.platformHeight / 2,
-				y: screenSize.platformHeight / 2,
+				x: pHeight / 2,
+				y: pHeight / 2,
 				w: 200,
 				h: 100
 			},
@@ -16,7 +16,7 @@ var AnimObjectFactory = function (options) {
 		console.warn("Animated object options not set. Setting defaults");
 	}
 	
-	var LEFT_GAP = (screenSize.platformWidth - (screenSize.platformHeight / 3 * 4) != 0)?( screenSize.platformWidth - (screenSize.platformHeight / 3 * 4) ) / 2:0;
+	var LEFT_GAP = (pWidth - (pHeight / 3 * 4) != 0)?( pWidth - (pHeight / 3 * 4) ) / 2:0;
 	
 	var object = Ti.UI.createView({
 		width: options.dim.w * F,
@@ -50,8 +50,8 @@ var AnimObjectFactory = function (options) {
 		
 			console.log('Obj.x',object.left,'Obj.y',object.top,'Event.x',e.x,'Event.y',e.y)
 			object.label = Ti.UI.createLabel({
-				top: object.top + e.y,
-				left: object.left + e.x,
+				top: object.top + e.y/density,
+				left: object.left + e.x/density,
 				text: options.text,
 				width: Ti.UI.SIZE, height: Ti.UI.SIZE,
 				font: {

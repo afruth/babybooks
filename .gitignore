@@ -8,3 +8,5 @@
 manifest
 Resources/appFiles/backgrounds
 Resources/appFiles
+
+.settings/com.appcelerator.titanium.android.core.prefs
