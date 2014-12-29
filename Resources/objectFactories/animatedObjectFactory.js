@@ -48,7 +48,7 @@ var AnimObjectFactory = function (options) {
 		
 		if (object.label === null) {
 		
-			console.log('Obj.x',object.left,'Obj.y',object.top,'Event.x',e.x,'Event.y',e.y)
+			console.log('Obj.x',object.left,'Obj.y',object.top,'Event.x',e.x,'Event.y',e.y);
 			object.label = Ti.UI.createLabel({
 				top: object.top + e.y/density,
 				left: object.left + e.x/density,

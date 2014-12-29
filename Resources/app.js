@@ -44,8 +44,9 @@ MainWindow = Ti.UI.createWindow({
 	width: pWidth,
 	backgroundColor: 'black',
 	navBarHidden: true,
-	fullscreen: true
-	//backgroundImage: '/appFiles/backgrounds/background-noise.png'
+	fullscreen: true,
+	backgroundImage: '/appFiles/backgrounds/bckg.jpg',
+	backgroundRepeat: true
 });
 MainWindow.keepScreenOn = true;
 MainWindow.open();
@@ -81,7 +82,7 @@ var label = Ti.UI.createLabel({
     text:"Stary",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -93,7 +94,7 @@ var label2 = Ti.UI.createLabel({
     text:"împreună cu",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -105,7 +106,7 @@ var label3 = Ti.UI.createLabel({
     text:"Taine Multimedia",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -117,7 +118,7 @@ var label4 = Ti.UI.createLabel({
     text:"prezintă",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -129,7 +130,7 @@ var label5 = Ti.UI.createLabel({
     text:"Ursul păcălit de vulpe",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -141,7 +142,7 @@ var label6 = Ti.UI.createLabel({
     text:"povestit de",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,
@@ -153,7 +154,7 @@ var label7 = Ti.UI.createLabel({
     text:"Răzvan Hîncu",
     width:pWidth,
     left: -pWidth,
-    color: 'white',
+    color: '#900',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
 			fontFamily: textFont,

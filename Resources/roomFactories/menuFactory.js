@@ -60,8 +60,9 @@ var menuFactory = function (options) {
 		backgroundColor: 'black',
 		navBarHidden: true,
 		fullscreen: true,
-		exitOnClose : true
-		//backgroundImage: '/appFiles/backgrounds/background-noise.png'
+		exitOnClose : true,
+		backgroundImage: '/appFiles/backgrounds/bckg.jpg',
+		backgroundRepeat: true
 	});
 	
 	
@@ -70,13 +71,15 @@ var menuFactory = function (options) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			height: pHeight,
-			width: pHeight / 3 * 4
+			height: pHeight -(5*F),
+			width: pHeight / 3 * 4 - (5*F),
 		});	
 		
 		var scrollView = Ti.UI.createView({
 			height: pHeight,
-			width: pHeight / 3 * 4
+			width: pHeight / 3 * 4,
+			borderWidth: 5*F,
+			borderColor: '#900'
 		});
 		
 		scrollView.add(imageView);
@@ -129,7 +132,8 @@ var menuFactory = function (options) {
 			},
 		    shadowColor: '#fff',
 		    shadowOffset: {x:2, y:2},
-		    shadowRadius: 3,		  
+		    shadowRadius: 3,	
+		    backgroundColor: 'transparent',	  
 		    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 			//backgroundImage: button.backgroundImage
 		});	
