@@ -144,21 +144,26 @@ var roomController = function(options) {
 	
 	this.showHideText = function() {
 		var button = this.loadedPages[0].getTextButton();
-		if (this.textHidden === false) {
-			this.textHidden = true;
-			var textBox = _.find(this.loadedPages[0].children, function (item) {
-				return item.name === 'textLabel';
-			});
-			textBox.visible = false;
-			button.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
+		if (button.state === 'on') {
+			button.turnOff();
 		} else {
-			this.textHidden = false;
-			var textBox = _.find(this.loadedPages[0].children, function (item) {
-				return item.name === 'textLabel';
-			});
-			textBox.visible = true;
-			button.backgroundImage = '/appFiles/button/textButtonSlice.png';
+			button.turnOn();
 		}
+		// if (this.textHidden === false) {
+			// this.textHidden = true;
+			// var textBox = _.find(this.loadedPages[0].children, function (item) {
+				// return item.name === 'textLabel';
+			// });
+			// textBox.visible = false;
+			// button.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
+		// } else {
+			// this.textHidden = false;
+			// var textBox = _.find(this.loadedPages[0].children, function (item) {
+				// return item.name === 'textLabel';
+			// });
+			// textBox.visible = true;
+			// button.backgroundImage = '/appFiles/button/textButtonSlice.png';
+		// }
 	};
 	
 	this.isTextHidden = function() {

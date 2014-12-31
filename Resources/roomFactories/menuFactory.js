@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 
 var menuFactory = function (options) {
 	
@@ -105,8 +103,8 @@ var menuFactory = function (options) {
 				fontSize: 72*F
 			},
 		    shadowColor: '#fff',
-		    shadowOffset: {x:2, y:2},
-		    shadowRadius: 3,		  
+		    shadowOffset: {x:0, y:0},
+		    shadowRadius: 10,		  
 		    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 		});
 	}
@@ -132,8 +130,8 @@ var menuFactory = function (options) {
 				fontSize: 43*F
 			},
 		    shadowColor: '#fff',
-		    shadowOffset: {x:2, y:2},
-		    shadowRadius: 3,	
+		    shadowOffset: {x:0, y:0},
+		    shadowRadius: 10,	
 		    backgroundColor: 'transparent',	  
 		    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 			//backgroundImage: button.backgroundImage

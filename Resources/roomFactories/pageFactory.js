@@ -134,6 +134,7 @@ var roomFactory = function (options) {
 		if (buttonShowHideText.state === 'on')
 			return;
 		buttonShowHideText.state = 'on';
+		text.visible = true;
 		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonSlice.png';
 	};
 	
@@ -141,6 +142,7 @@ var roomFactory = function (options) {
 		if (buttonShowHideText.state === 'off')
 			return;
 		buttonShowHideText.state = 'off';
+		text.visible = false;
 		buttonShowHideText.backgroundImage = '/appFiles/button/textButtonDisabledSlice.png';
 	};
 	
@@ -345,14 +347,12 @@ var roomFactory = function (options) {
 			buttonShowHideText.turnOff();
 			buttonReadmeMode.turnOn();
 			buttonShowHideMenu.readMeMode();
-			text.visible = false;
 			
 		} else {
 			buttonStartPauseAudio.play();
 			pageController.sound.pause();
 			buttonReadmeMode.turnOff();
 			buttonShowHideText.turnOn();
-			text.visible = true;
 			
 		}
 
@@ -374,14 +374,13 @@ var roomFactory = function (options) {
 			buttonShowHideText.turnOff();
 			buttonReadmeMode.turnOn();
 			buttonShowHideMenu.readMeMode();
-			text.visible = false;
+			
 			
 		} else {
 			buttonStartPauseAudio.play();
 			pageController.sound.pause();
 			buttonReadmeMode.turnOff();
 			buttonShowHideText.turnOn();
-			text.visible = true;
 			
 		}
 
