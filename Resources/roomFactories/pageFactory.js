@@ -18,15 +18,19 @@ var roomFactory = function (options) {
 		};
 	
 	var window = Ti.UI.createWindow({
-		height: pHeight,
-		width: pWidth,
 		backgroundColor: 'black',
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
 		fullscreen: true,
 		backgroundImage: '/appFiles/backgrounds/bckg.jpg',
-		backgroundRepeat: true
+		backgroundRepeat: true,
+		keepScreenOn: true
 	});
+	
+	if(OSNAME != 'android') {
+		window.height = pHeight;
+		window.width = pWidth;
+	}
 	
 	
 	
@@ -34,18 +38,15 @@ var roomFactory = function (options) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			height: pHeight -(5*F),
-			width: pHeight / 3 * 4 - (5*F),
+			height: pHeight,
+			width: pHeight / 3 * 4,
 			touchEnabled: false
 		});	
 		
 		var scrollView = Ti.UI.createView({
 			height: pHeight,
 			width: pHeight / 3 * 4,
-			touchEnabled: false,
-			borderWidth: 5*F,
-			borderColor: '#900',
-			borderRadius: 5
+			touchEnabled: false
 		});
 		
 		scrollView.add(imageView);

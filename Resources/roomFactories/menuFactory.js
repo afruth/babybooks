@@ -55,8 +55,6 @@ var menuFactory = function (options) {
 	};
 	
 	var window = Ti.UI.createWindow({
-		height: pHeight,
-		width: pWidth,
 		backgroundColor: 'black',
 		navBarHidden: true,
 		fullscreen: true,
@@ -65,21 +63,24 @@ var menuFactory = function (options) {
 		backgroundRepeat: true
 	});
 	
+	if(OSNAME != 'android') {
+		window.height = pHeight;
+		window.width = pWidth;
+	}
+	
 	
 	
 	if (options.background) {
 		
 		var imageView = Ti.UI.createImageView({
 			image: options.background,
-			height: pHeight -(5*F),
-			width: pHeight / 3 * 4 - (5*F),
+			height: pHeight,
+			width: pHeight / 3 * 4,
 		});	
 		
 		var scrollView = Ti.UI.createView({
 			height: pHeight,
-			width: pHeight / 3 * 4,
-			borderWidth: 5*F,
-			borderColor: '#900'
+			width: pHeight / 3 * 4
 		});
 		
 		scrollView.add(imageView);

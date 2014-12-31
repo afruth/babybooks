@@ -20,6 +20,10 @@ var AudioObjectFactory = function (soundPath) {
 			}
 		}
 	});
+	
+	sound.addEventListener('change', function (e){
+		Ti.API.info(e.description, e.state, e.source);
+	});
 		
 	return sound;
 };
