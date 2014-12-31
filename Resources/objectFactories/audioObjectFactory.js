@@ -13,10 +13,12 @@ var AudioObjectFactory = function (soundPath) {
 	
 	sound.addEventListener('complete', function(e){
 		if (pageController.readmeMode) {
-			if (pageController.hasNextPage) {
+			if (pageController.hasNextPage()) {
 				pageController.nextPage();
 			} else {
-				pageController.backToMenu();
+				setTimeout(function() {
+					pageController.backToMenu();
+				},5000);	
 			}
 		}
 	});

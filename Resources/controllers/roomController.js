@@ -202,7 +202,6 @@ var roomController = function(options) {
 	
 	this.backToMenu = function() {
 		this.resetPages();
-		
 	};
 	
 	
