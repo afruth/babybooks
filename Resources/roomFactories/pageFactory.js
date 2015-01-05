@@ -22,7 +22,7 @@ var roomFactory = function (options) {
 		orientationModes: [Titanium.UI.LANDSCAPE_LEFT,  Titanium.UI.LANDSCAPE_RIGHT],
 		navBarHidden: true,
 		fullscreen: true,
-		backgroundImage: '/appFiles/backgrounds/bckg.jpg',
+		backgroundImage: '/appFiles/backgrounds/page_back.jpg',
 		backgroundRepeat: true,
 		keepScreenOn: true
 	});
@@ -46,11 +46,21 @@ var roomFactory = function (options) {
 		var scrollView = Ti.UI.createView({
 			height: pHeight,
 			width: pHeight / 3 * 4,
+			right:0,
 			touchEnabled: false
 		});
 		
 		scrollView.add(imageView);
+		
+		pageBack = Ti.UI.createView({
+			backgroundImage: '/appFiles/backgrounds/page_back.jpg',
+			height: pHeight,
+			width: (pHeight / 3 * 4) * 2,
+			right: 0
+		});
+		window.add(pageBack);
 		window.add(scrollView);
+		
 	}
 	
 	//building the next and previous buttons
