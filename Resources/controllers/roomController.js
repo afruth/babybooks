@@ -241,6 +241,8 @@ var roomController = function(options) {
 			});
 			
 			
+			
+			
 			roomOut.close();
 				
 			} else {
@@ -249,6 +251,7 @@ var roomController = function(options) {
 					roomIn.open(ANIM.fadeIn);
 					});
 			}		
+			
 			
 			if (AdEnabled === true) {
 				//loading ads

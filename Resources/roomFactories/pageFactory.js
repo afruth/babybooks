@@ -280,10 +280,14 @@ var roomFactory = function (options) {
 		if (pageController.readmeMode === true) {
 			setTimeout(function(){
 				pageController.sound.play();
-			},1000);
+			},2000);
 			
 		}
 	}
+	
+	
+	
+	
 	buttonLeftHolder.add(buttonReadmeMode);
 	buttonLeftHolder.add(buttonBackToMenu);
 	
@@ -304,7 +308,26 @@ var roomFactory = function (options) {
 		Tracker.trackScreen({ screenName: "Pagina "+pageController.currentPage });
 	});
 	
-	
+	//code to handle going into the background / foreground for the app
+	if (OSNAME === 'android') {
+		
+		window.addEventListener('blur', function(e) {
+			console.log('PAUSED')
+			if (pageController.sound) 
+		  		pageController.sound.pause();
+		});
+		
+		 
+		// incidentally, you could also do
+		window.addEventListener('focus', function(e) {
+			console.log('RESUMED')
+		  // do whatever to start your music playing again
+		  if (pageController.readmeMode === true) {
+		  	pageController.sound.play();
+		  }
+		});
+	}
+
 
 	window.showHideMenu = function() {
 		if (pageController.menuHidden === true) {

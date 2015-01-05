@@ -4,10 +4,10 @@
     <property name="acs-api-key-development" type="string">oDbJnrjs6gRiXYGAiEmOqkEfblu0qJBN</property>
     <id>ro.stary.ursulpacalit</id>
     <name>Ursul Pacalit </name>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <publisher>Andreas Fruth</publisher>
-    <url>http://www.lemur.ro</url>
-    <description>undefined</description>
+    <url>https://www.facebook.com/PovestileStary</url>
+    <description>Un proiect ce incearca sa aduca povesti clasice romanesti si internationale pe dispozitive mobile cu Android si iOS.</description>
     <copyright>2014 by StarStory</copyright>
     <icon>appicon.png</icon>
     <fullscreen>true</fullscreen>
@@ -41,7 +41,7 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest>
+        <manifest android:versionCode="2">
             <uses-sdk android:minSdkVersion="14"/>
             <application android:debuggable="false"
                 android:icon="@drawable/appicon"
